@@ -3,834 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Legal Consultant</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Global Styles */
-        :root {
-            --primary-color: #1a3e72;
-            --secondary-color: #e8b339;
-            --accent-color: #2a5298;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --text-color: #333;
-            --text-light: #6c757d;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-secondary {
-            background-color: var(--secondary-color);
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-        
-        nav ul li a:hover {
-            color: var(--primary-color);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(26, 62, 114, 0.8), rgba(26, 62, 114, 0.8)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: white;
-            margin-top: 70px;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-        
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        /* Practice Areas */
-        .practice-areas {
-            background-color: var(--light-color);
-        }
-        
-        .areas-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .area-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .area-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .area-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .area-content {
-            padding: 25px;
-        }
-        
-        .area-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        
-        /* About Section */
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .about-img {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .about-content h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-        
-        .about-content p {
-            margin-bottom: 20px;
-        }
-        
-        .about-list {
-            margin: 30px 0;
-        }
-        
-        .about-list li {
-            margin-bottom: 10px;
-            list-style-type: none;
-            position: relative;
-            padding-left: 30px;
-        }
-        
-        .about-list li i {
-            color: var(--secondary-color);
-            position: absolute;
-            left: 0;
-            top: 5px;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            background-color: var(--light-color);
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .testimonial-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .testimonial-card .quote {
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-        
-        .client-info {
-            display: flex;
-            align-items: center;
-        }
-        
-        .client-info img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-        
-        .client-name h4 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-        
-        .client-name p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        
-        /* Blog Section */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .blog-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .blog-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .blog-content {
-            padding: 25px;
-        }
-        
-        .blog-content .meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        
-        .blog-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        
-        .blog-content p {
-            margin-bottom: 15px;
-        }
-        
-        .read-more {
-            color: var(--primary-color);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .read-more i {
-            margin-left: 5px;
-            transition: transform 0.3s ease;
-        }
-        
-        .read-more:hover i {
-            transform: translateX(5px);
-        }
-        
-        /* Contact Section */
-        .contact {
-            background-color: var(--light-color);
-        }
-        
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-        
-        .contact-details {
-            margin-bottom: 30px;
-        }
-        
-        .contact-item {
-            display: flex;
-            margin-bottom: 15px;
-        }
-        
-        .contact-item i {
-            color: var(--secondary-color);
-            font-size: 1.2rem;
-            margin-right: 15px;
-            margin-top: 5px;
-        }
-        
-        .contact-form .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .contact-form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        
-        .contact-form textarea {
-            height: 150px;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 60px 0 20px;
-        }
-        
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-col h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--secondary-color);
-        }
-        
-        .footer-col p {
-            margin-bottom: 15px;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-            list-style: none;
-        }
-        
-        .footer-links a {
-            color: #adb5bd;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #adb5bd;
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .about-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-img {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 15px 0;
-            }
-            
-            nav {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 70px);
-                background-color: white;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                transition: left 0.3s ease;
-                z-index: 999;
-            }
-            
-            nav.active {
-                left: 0;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                padding: 30px;
-            }
-            
-            nav ul li {
-                margin: 0 0 20px 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-btns {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            section {
-                padding: 60px 0;
-            }
-            
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <title>Law Chambers of [Your Name] | Criminal Defense Lawyer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header/Navigation -->
     <header>
-        <div class="container header-container">
+        <div class="container">
             <div class="logo">
-                <img src="https://via.placeholder.com/50x50" alt="Logo">
-                <h1>Your Name</h1>
+                <h1>Law Chambers of <span>[Your Name]</span></h1>
             </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="mainNav">
+            <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#practice-areas">Practice Areas</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#practice">Practice Areas</a></li>
                     <li><a href="#blog">Blog</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Expert Legal Solutions Tailored to Your Needs</h1>
-                <p>With over 15 years of experience in civil and criminal law, I provide dedicated legal representation to protect your rights and achieve the best possible outcomes.</p>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn">Get Free Consultation</a>
-                    <a href="tel:+1234567890" class="btn btn-secondary"><i class="fas fa-phone"></i> Call Now</a>
-                </div>
+                <h1>Expert Legal Defense in Criminal, Bail, and NDPS Cases</h1>
+                <p>20+ years experience in High Courts & Supreme Court of India</p>
+                <a href="#contact" class="btn">Free Consultation <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- Practice Areas Section -->
-    <section class="practice-areas" id="practice-areas">
+    <!-- Key Services -->
+    <section class="services">
         <div class="container">
-            <div class="section-title">
-                <h2>Practice Areas</h2>
-                <p>I provide comprehensive legal services across various practice areas to meet your specific needs.</p>
-            </div>
-            <div class="areas-grid">
-                <div class="area-card">
-                    <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Criminal Law">
-                    <div class="area-content">
-                        <h3>Criminal Defense</h3>
-                        <p>Protecting your rights with aggressive defense strategies for all criminal charges including DUI, theft, assault, and more.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+            <h2>Our Legal Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-gavel"></i>
+                    <h3>Bail Services</h3>
+                    <p>Anticipatory, Regular, and NDPS Act bail applications with high success rate.</p>
                 </div>
-                <div class="area-card">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Family Law">
-                    <div class="area-content">
-                        <h3>Family Law</h3>
-                        <p>Compassionate representation for divorce, child custody, alimony, and other family law matters.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+                <div class="service-item">
+                    <i class="fas fa-file-contract"></i>
+                    <h3>FIR Quashing</h3>
+                    <p>Legal remedies for false cases under Section 482 CrPC.</p>
                 </div>
-                <div class="area-card">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80" alt="Property Law">
-                    <div class="area-content">
-                        <h3>Property Disputes</h3>
-                        <p>Resolving complex property disputes including landlord-tenant issues, inheritance claims, and real estate litigation.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+                <div class="service-item">
+                    <i class="fas fa-home"></i>
+                    <h3>Family Law</h3>
+                    <p>Divorce, child custody, and maintenance disputes resolution.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-landmark"></i>
+                    <h3>Property Disputes</h3>
+                    <p>Title verification, benami property litigation, and partition suits.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
+    <section id="about" class="about">
         <div class="container">
-            <div class="about-container">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Your Name">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About [Your Name]</h2>
+                    <p>Practicing since 2005, I specialize in criminal defense with a focus on NDPS cases, white-collar crimes, and bail matters across Delhi High Court and Supreme Court of India.</p>
+                    <p>My approach combines rigorous legal research with strategic courtroom arguments to secure favorable outcomes for clients.</p>
+                    <div class="credentials">
+                        <div class="cred-item">
+                            <i class="fas fa-award"></i>
+                            <span>Member, Delhi High Court Bar Association</span>
+                        </div>
+                        <div class="cred-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>LLB, Faculty of Law, Delhi University</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="about-content">
-                    <h2>About Me</h2>
-                    <p>I am a dedicated legal professional with over 15 years of experience representing clients in various legal matters. My approach combines extensive legal knowledge with personalized attention to each client's unique situation.</p>
-                    <p>After graduating from [Law School] in [Year], I began my career at [Firm Name] before establishing my own practice to provide more focused representation to my clients.</p>
-                    <ul class="about-list">
-                        <li><i class="fas fa-check"></i> 15+ Years of Legal Experience</li>
-                        <li><i class="fas fa-check"></i> 500+ Cases Successfully Handled</li>
-                        <li><i class="fas fa-check"></i> Personalized Attention to Each Client</li>
-                        <li><i class="fas fa-check"></i> Member of State Bar Association</li>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/400x500" alt="[Your Name] - Lawyer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas -->
+    <section id="practice" class="practice">
+        <div class="container">
+            <h2>Practice Areas</h2>
+            <div class="practice-grid">
+                <div class="practice-item">
+                    <h3><i class="fas fa-handcuffs"></i> Criminal Defense</h3>
+                    <ul>
+                        <li>Bail (NDPS, IPC 420, POCSO)</li>
+                        <li>Cheating & Fraud cases</li>
+                        <li>Murder & Attempt to Murder</li>
+                        <li>White-collar crimes</li>
                     </ul>
-                    <a href="#" class="btn">View My Full Profile</a>
+                </div>
+                <div class="practice-item">
+                    <h3><i class="fas fa-users"></i> Family Law</h3>
+                    <ul>
+                        <li>Mutual consent divorce</li>
+                        <li>Child custody disputes</li>
+                        <li>Domestic violence cases</li>
+                        <li>Maintenance & alimony</li>
+                    </ul>
+                </div>
+                <div class="practice-item">
+                    <h3><i class="fas fa-landmark"></i> Property & Financial</h3>
+                    <ul>
+                        <li>Money laundering cases</li>
+                        <li>Benami property litigation</li>
+                        <li>Landlord-tenant disputes</li>
+                        <li>Will & succession</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
+    <!-- Testimonials -->
+    <section class="testimonials">
         <div class="container">
-            <div class="section-title">
-                <h2>Client Testimonials</h2>
-                <p>Here's what my clients say about my legal services and representation.</p>
-            </div>
+            <h2>Client Testimonials</h2>
             <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="quote">
-                        <p>"I was facing serious criminal charges and was terrified. Your expertise and dedication resulted in all charges being dropped. I can't thank you enough for saving my future."</p>
+                <div class="testimonial-item">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="client-info">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
-                        <div class="client-name">
-                            <h4>Rajesh Kumar</h4>
-                            <p>Criminal Defense Client</p>
-                        </div>
-                    </div>
+                    <p>"[Your Name] Sir's strategic arguments secured my anticipatory bail in a complex NDPS case. His dedication is unmatched."</p>
+                    <div class="client">- Ramesh K., Delhi</div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="quote">
-                        <p>"The divorce process was emotionally draining, but you guided me through every step with compassion and professionalism. I got fair settlement thanks to your efforts."</p>
+                <div class="testimonial-item">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <div class="client-info">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
-                        <div class="client-name">
-                            <h4>Priya Sharma</h4>
-                            <p>Family Law Client</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="quote">
-                        <p>"Our property dispute had been going on for years before we hired you. You resolved it in just 6 months with favorable outcome. Highly recommended!"</p>
-                    </div>
-                    <div class="client-info">
-                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client">
-                        <div class="client-name">
-                            <h4>Vikram Singh</h4>
-                            <p>Property Law Client</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="blog" id="blog">
-        <div class="container">
-            <div class="section-title">
-                <h2>Latest Legal Insights</h2>
-                <p>Stay informed with my latest articles on legal matters and updates.</p>
-            </div>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Blog Post">
-                    <div class="blog-content">
-                        <div class="meta">
-                            <span><i class="far fa-calendar"></i> June 15, 2023</span>
-                            <span><i class="far fa-comments"></i> 5 Comments</span>
-                        </div>
-                        <h3>Understanding New Changes in Divorce Laws</h3>
-                        <p>Recent amendments to divorce laws have significant implications for alimony and child custody arrangements. Here's what you need to know.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Blog Post">
-                    <div class="blog-content">
-                        <div class="meta">
-                            <span><i class="far fa-calendar"></i> May 28, 2023</span>
-                            <span><i class="far fa-comments"></i> 12 Comments</span>
-                        </div>
-                        <h3>How to Protect Your Rights During Police Interrogation</h3>
-                        <p>Knowing your rights when questioned by police can make the difference between freedom and wrongful conviction.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Blog Post">
-                    <div class="blog-content">
-                        <div class="meta">
-                            <span><i class="far fa-calendar"></i> April 10, 2023</span>
-                            <span><i class="far fa-comments"></i> 8 Comments</span>
-                        </div>
-                        <h3>Resolving Property Disputes Without Lengthy Litigation</h3>
-                        <p>Alternative dispute resolution methods can save time and money when dealing with property conflicts.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                    <p>"Got my FIR quashed within 3 months. Highly recommend for criminal matters in Delhi courts."</p>
+                    <div class="client">- Priya M., Noida</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <section id="contact" class="contact">
         <div class="container">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-                <p>Contact me today for a confidential consultation about your legal matter.</p>
-            </div>
-            <div class="contact-container">
+            <h2>Contact Us</h2>
+            <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Office Address</h4>
-                                <p>123 Legal Street, Suite 456<br>New Delhi, India 110001</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+91 98765 43210</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>contact@yourlegalwebsite.com</p>
-                            </div>
-                        </div>
+                    <h3>Get in Touch</h3>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Legal Lane, Tis Hazari Court, Delhi 110054</span>
                     </div>
-                    <h3>Office Hours</h3>
-                    <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
-                    Saturday: 10:00 AM - 2:00 PM<br>
-                    Sunday: Closed</p>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+91 98XXXXXX98</span>
+                    </div>
+                    <div class="info-item emergency">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Emergency Bail: +91 99XXXXXX99</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@yourlawfirm.com</span>
+                    </div>
                 </div>
                 <div class="contact-form">
                     <form>
                         <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" required>
+                            <input type="text" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" required>
+                            <input type="email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone">
+                            <input type="tel" placeholder="Phone Number" required>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject">
+                            <textarea placeholder="Your Legal Issue" required></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
+                        <button type="submit" class="btn">Send Message <i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
@@ -840,95 +210,38 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-container">
-                <div class="footer-col">
-                    <div class="logo">
-                        <img src="https://via.placeholder.com/50x50" alt="Logo">
-                        <h1>Your Name</h1>
-                    </div>
-                    <p>Providing expert legal representation with personalized attention to each client's unique needs and circumstances.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>Law Chambers of [Your Name]</h3>
+                    <p>Providing expert legal defense in Delhi and Supreme Court of India since 2005.</p>
                 </div>
-                <div class="footer-col">
-                    <h3>Practice Areas</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Criminal Defense</a></li>
-                        <li><a href="#">Family Law</a></li>
-                        <li><a href="#">Property Disputes</a></li>
-                        <li><a href="#">Corporate Law</a></li>
-                        <li><a href="#">Civil Litigation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
+                <div class="footer-links">
                     <h3>Quick Links</h3>
-                    <ul class="footer-links">
+                    <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#practice-areas">Practice Areas</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#practice">Practice Areas</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-col">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to my newsletter for legal updates and insights.</p>
-                    <form>
-                        <input type="email" placeholder="Your Email Address" required>
-                        <button type="submit" class="btn">Subscribe</button>
-                    </form>
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Your Name. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                <p>&copy; 2023 Law Chambers of [Your Name]. All Rights Reserved.</p>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a> | <a href="#">Disclaimer</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Smooth Scrolling for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                if(this.getAttribute('href') === '#') return;
-                
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if(mainNav.classList.contains('active')) {
-                        mainNav.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                }
-            });
-        });
-        
-        // Sticky Header on Scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            header.classList.toggle('sticky', window.scrollY > 0);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
