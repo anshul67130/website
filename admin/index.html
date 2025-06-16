@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Admin Panel</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>Content Manager</h2>
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="#" class="active" data-tab="home"><i class="fas fa-home"></i> Home Content</a></li>
+                    <li><a href="#" data-tab="practice-areas"><i class="fas fa-gavel"></i> Practice Areas</a></li>
+                    <li><a href="#" data-tab="about"><i class="fas fa-user-tie"></i> About Section</a></li>
+                    <li><a href="#" data-tab="testimonials"><i class="fas fa-quote-left"></i> Testimonials</a></li>
+                    <li><a href="#" data-tab="blog"><i class="fas fa-blog"></i> Blog Posts</a></li>
+                    <li><a href="#" data-tab="contact"><i class="fas fa-envelope"></i> Contact Info</a></li>
+                    <li><a href="#" data-tab="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1 id="admin-title">Dashboard</h1>
+                <div class="admin-actions">
+                    <button id="save-all" class="btn primary"><i class="fas fa-save"></i> Save All Changes</button>
+                    <button id="preview" class="btn secondary"><i class="fas fa-eye"></i> Preview</button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Home Content Tab -->
+                <div class="tab-content active" id="home-tab">
+                    <form id="home-form">
+                        <div class="form-group">
+                            <label for="hero-title">Hero Title</label>
+                            <input type="text" id="hero-title" name="hero-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hero-subtitle">Hero Subtitle</label>
+                            <textarea id="hero-subtitle" name="hero-subtitle" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cta-primary">Primary Button Text</label>
+                            <input type="text" id="cta-primary" name="cta-primary" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cta-secondary">Secondary Button Text</label>
+                            <input type="text" id="cta-secondary" name="cta-secondary" required>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Practice Areas Tab -->
+                <div class="tab-content" id="practice-areas-tab">
+                    <button id="add-area" class="btn primary"><i class="fas fa-plus"></i> Add Practice Area</button>
+                    <div class="areas-list" id="areas-list">
+                        <!-- Dynamically loaded -->
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div class="tab-content" id="about-tab">
+                    <form id="about-form">
+                        <div class="form-group">
+                            <label for="about-title">About Title</label>
+                            <input type="text" id="about-title" name="about-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="about-text">About Content</label>
+                            <textarea id="about-text" name="about-text" rows="6" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Credentials</label>
+                            <div id="credentials-list">
+                                <!-- Dynamically loaded -->
+                            </div>
+                            <button type="button" id="add-credential" class="btn secondary">Add Credential</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Testimonials Tab -->
+                <div class="tab-content" id="testimonials-tab">
+                    <button id="add-testimonial" class="btn primary"><i class="fas fa-plus"></i> Add Testimonial</button>
+                    <div class="testimonials-list" id="testimonials-list">
+                        <!-- Dynamically loaded -->
+                    </div>
+                </div>
+
+                <!-- Blog Tab -->
+                <div class="tab-content" id="blog-tab">
+                    <button id="add-post" class="btn primary"><i class="fas fa-plus"></i> Add Blog Post</button>
+                    <div class="posts-list" id="posts-list">
+                        <!-- Dynamically loaded -->
+                    </div>
+                </div>
+
+                <!-- Contact Tab -->
+                <div class="tab-content" id="contact-tab">
+                    <form id="contact-form-admin">
+                        <div class="form-group">
+                            <label for="contact-title">Contact Title</label>
+                            <input type="text" id="contact-title" name="contact-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hours">Business Hours</label>
+                            <input type="text" id="hours" name="hours" required>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-content" id="settings-tab">
+                    <form id="settings-form">
+                        <div class="form-group">
+                            <label for="firm-name">Firm Name</label>
+                            <input type="text" id="firm-name" name="firm-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="copyright">Copyright Text</label>
+                            <input type="text" id="copyright" name="copyright" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Social Media Links</label>
+                            <div id="social-links-admin">
+                                <!-- Dynamically loaded -->
+                            </div>
+                            <button type="button" id="add-social" class="btn secondary">Add Social Media</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for editing items -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-title">Edit Item</h2>
+            <form id="modal-form">
+                <!-- Dynamically loaded -->
+            </form>
+            <div class="modal-actions">
+                <button id="save-modal" class="btn primary">Save Changes</button>
+                <button id="cancel-modal" class="btn secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Law Practice | Legal Services</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Law Firm Logo" id="logo-image">
+                <h1 id="firm-name">Law Firm</h1>
+            </div>
+            <nav>
+                <ul id="main-nav">
+                    <!-- Dynamically loaded from JSON -->
+                </ul>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="hero-title">Legal Expertise You Can Trust</h1>
+                <p id="hero-subtitle">Providing exceptional legal services for over 15 years</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn primary" id="cta-primary">Free Consultation</a>
+                    <a href="tel:+1234567890" class="btn secondary" id="cta-secondary"><i class="fas fa-phone"></i> Call Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas -->
+    <section class="practice-areas" id="practice-areas">
+        <div class="container">
+            <h2 class="section-title">Our Practice Areas</h2>
+            <div class="areas-grid" id="areas-container">
+                <!-- Dynamically loaded from JSON -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 id="about-title">About Our Firm</h2>
+                <div id="about-text">
+                    <!-- Content loaded from JSON -->
+                </div>
+                <div class="credentials" id="credentials">
+                    <!-- Dynamically loaded -->
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="assets/lawyer.jpg" alt="Lawyer Portrait" id="lawyer-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <div class="testimonials-grid" id="testimonials-container">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <h2 class="section-title">Legal Insights</h2>
+            <div class="blog-grid" id="blog-container">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 id="contact-title">Get In Touch</h3>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="address">123 Legal Street, Suite 100</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span id="phone">(555) 123-4567</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span id="email">contact@lawfirm.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="hours">Mon-Fri: 9AM-6PM</span>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3 id="footer-about-title">About Us</h3>
+                    <p id="footer-about-text">Brief firm description</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul id="footer-links">
+                        <!-- Dynamically loaded -->
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p id="copyright">&copy; 2023 Law Firm. All rights reserved.</p>
+                <div class="social-links" id="social-links">
+                    <!-- Dynamically loaded -->
+                </div>
+                <a href="/admin" class="admin-login">Admin Login</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

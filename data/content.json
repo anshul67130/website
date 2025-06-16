@@ -1,0 +1,65 @@
+{
+    "home": {
+        "heroTitle": "Expert Legal Solutions You Can Trust",
+        "heroSubtitle": "With over 15 years of experience, we provide dedicated legal representation to protect your rights and achieve the best possible outcomes.",
+        "ctaPrimary": "Free Consultation",
+        "ctaSecondary": "Call Now"
+    },
+    "practiceAreas": [
+        {
+            "title": "Criminal Defense",
+            "description": "Protecting your rights with aggressive defense strategies for all criminal charges including DUI, theft, assault, and more."
+        },
+        {
+            "title": "Family Law",
+            "description": "Compassionate representation for divorce, child custody, alimony, and other family law matters."
+        },
+        {
+            "title": "Property Disputes",
+            "description": "Resolving complex property disputes including landlord-tenant issues, inheritance claims, and real estate litigation."
+        }
+    ],
+    "about": {
+        "title": "About Our Law Firm",
+        "content": "Our firm was founded with the goal of providing exceptional legal services with a personal touch. We believe every client deserves dedicated attention and customized legal strategies to achieve their goals.",
+        "credentials": [
+            "15+ Years of Legal Experience",
+            "500+ Cases Successfully Handled",
+            "Personalized Attention to Each Client",
+            "Member of State Bar Association"
+        ]
+    },
+    "testimonials": [
+        {
+            "clientName": "Rajesh Kumar",
+            "clientTitle": "Criminal Defense Client",
+            "content": "I was facing serious criminal charges and was terrified. Your expertise and dedication resulted in all charges being dropped. I can't thank you enough for saving my future."
+        },
+        {
+            "clientName": "Priya Sharma",
+            "clientTitle": "Family Law Client",
+            "content": "The divorce process was emotionally draining, but you guided me through every step with compassion and professionalism. I got fair settlement thanks to your efforts."
+        }
+    ],
+    "contact": {
+        "title": "Get In Touch",
+        "address": "123 Legal Street, Suite 456, New Delhi, India 110001",
+        "phone": "+91 98765 43210",
+        "email": "contact@lawfirm.com",
+        "hours": "Monday-Friday: 9:00 AM - 6:00 PM, Saturday: 10:00 AM - 2:00 PM"
+    },
+    "settings": {
+        "firmName": "Legal Solutions",
+        "copyright": "© 2023 Legal Solutions. All rights reserved.",
+        "socialLinks": [
+            {
+                "platform": "facebook",
+                "url": "https://facebook.com"
+            },
+            {
+                "platform": "linkedin",
+                "url": "https://linkedin.com"
+            }
+        ]
+    }
+}
