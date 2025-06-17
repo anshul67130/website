@@ -1,579 +1,726 @@
-// Admin Panel Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Load all content
-    let websiteContent = {};
+    // Initialize website data
+    let websiteData = {
+        home: {
+            heroTitle: "Your Trusted Legal Partners",
+            heroSubtitle: "With over 20 years of combined experience, we provide exceptional legal representation tailored to your unique needs."
+        },
+        services: [
+            {
+                title: "Corporate Law",
+                description: "Comprehensive legal solutions for businesses including formation, contracts, and compliance."
+            },
+            {
+                title: "Family Law",
+                description: "Sensitive handling of divorce, child custody, and other family-related legal matters."
+            }
+        ],
+        about: {
+            title: "About Our Firm",
+            content: "Founded in 2003, Law & Partners has grown from a small practice to one of the most respected law firms in the region. Our team of dedicated attorneys brings diverse expertise to every case.",
+            credentials: [
+                "20+ Years Combined Experience",
+                "1000+ Cases Handled",
+                "Award-Winning Legal Team"
+            ]
+        },
+        testimonials: [
+            {
+                clientName: "Sarah Johnson",
+                clientTitle: "Corporate Client",
+                content: "The team at Law & Partners saved our business during a critical contract dispute. Their expertise was invaluable."
+            }
+        ],
+        contact: {
+            title: "Our Office",
+            address: "123 Justice Ave, Suite 500\nNew York, NY 10001",
+            phone: "+1 (123) 456-7890",
+            email: "contact@lawandpartners.com",
+            hours: "Mon-Fri: 9:00 AM - 6:00 PM"
+        },
+        settings: {
+            firmName: "Law & Partners",
+            socialLinks: [
+                {
+                    platform: "facebook",
+                    url: "https://facebook.com/lawandpartners"
+                },
+                {
+                    platform: "linkedin",
+                    url: "https://linkedin.com/company/law-and-partners"
+                }
+            ]
+        },
+        blog: [
+            {
+                title: "Understanding the New Corporate Transparency Act",
+                date: "2023-11-15",
+                content: "The Corporate Transparency Act (CTA) introduces significant reporting requirements for businesses. Effective January 1, 2024, most corporations, LLCs, and similar entities will need to report beneficial ownership information to FinCEN."
+            }
+        ]
+    };
+
     let currentEditItem = null;
-    
-    // Tab switching
-    const tabs = document.querySelectorAll('.admin-nav a');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function(e) {
-            e.preventDefault();
-            const tabId = this.getAttribute('data-tab');
-            
-            // Update active tab
-            tabs.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Update admin title
-            document.getElementById('admin-title').textContent = this.textContent.trim();
-            
-            // Show correct tab content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(`${tabId}-tab`).classList.add('active');
-        });
-    });
-    
-    // Load data from JSON files
-    function loadContent() {
-        fetch('../data/content.json')
-            .then(response => response.json())
-            .then(data => {
-                websiteContent = data;
-                populateForms();
-            })
-            .catch(error => console.error('Error loading content:', error));
+
+    // Load saved data if available
+    function loadSavedData() {
+        const savedContent = localStorage.getItem('lawWebsiteContent');
+        const savedBlog = localStorage.getItem('lawWebsiteBlog');
         
-        fetch('../data/blog.json')
-            .then(response => response.json())
-            .then(data => {
-                websiteContent.blog = data;
-                renderBlogPosts();
-            })
-            .catch(error => console.error('Error loading blog posts:', error));
+        if (savedContent) {
+            const parsedContent = JSON.parse(savedContent);
+            websiteData = {
+                ...websiteData,
+                ...parsedContent
+            };
+        }
+        
+        if (savedBlog) {
+            websiteData.blog = JSON.parse(savedBlog);
+        }
     }
-    
-    // Populate forms with current content
+
+    // Initialize the admin panel
+    function initAdminPanel() {
+        loadSavedData();
+        setupTabNavigation();
+        populateForms();
+        setupEventListeners();
+    }
+
+    // Set up tab navigation
+    function setupTabNavigation() {
+        const tabs = document.querySelectorAll('.admin-nav a');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show the selected tab content
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+                
+                // Update admin title
+                document.getElementById('admin-title').textContent = this.textContent.trim();
+            });
+        });
+        
+        // Activate the first tab by default
+        if (tabs.length > 0) {
+            tabs[0].click();
+        }
+    }
+
+    // Populate forms with current data
     function populateForms() {
         // Home tab
-        document.getElementById('hero-title').value = websiteContent.home.heroTitle;
-        document.getElementById('hero-subtitle').value = websiteContent.home.heroSubtitle;
-        document.getElementById('cta-primary').value = websiteContent.home.ctaPrimary;
-        document.getElementById('cta-secondary').value = websiteContent.home.ctaSecondary;
+        document.getElementById('hero-title').value = websiteData.home.heroTitle;
+        document.getElementById('hero-subtitle').value = websiteData.home.heroSubtitle;
         
-        // Practice Areas
-        renderPracticeAreas();
+        // Services tab
+        renderServicesList();
         
         // About tab
-        document.getElementById('about-title').value = websiteContent.about.title;
-        document.getElementById('about-text').value = websiteContent.about.content;
-        renderCredentials();
+        document.getElementById('about-title').value = websiteData.about.title;
+        document.getElementById('about-text').value = websiteData.about.content;
+        renderCredentialsList();
         
-        // Testimonials
-        renderTestimonials();
+        // Testimonials tab
+        renderTestimonialsList();
+        
+        // Blog tab
+        renderBlogPostsList();
         
         // Contact tab
-        document.getElementById('contact-title').value = websiteContent.contact.title;
-        document.getElementById('address').value = websiteContent.contact.address;
-        document.getElementById('phone').value = websiteContent.contact.phone;
-        document.getElementById('email').value = websiteContent.contact.email;
-        document.getElementById('hours').value = websiteContent.contact.hours;
+        document.getElementById('contact-title').value = websiteData.contact.title;
+        document.getElementById('address').value = websiteData.contact.address;
+        document.getElementById('phone').value = websiteData.contact.phone;
+        document.getElementById('email').value = websiteData.contact.email;
+        document.getElementById('hours').value = websiteData.contact.hours;
         
         // Settings tab
-        document.getElementById('firm-name').value = websiteContent.settings.firmName;
-        document.getElementById('copyright').value = websiteContent.settings.copyright;
-        renderSocialLinks();
+        document.getElementById('firm-name').value = websiteData.settings.firmName;
+        renderSocialLinksList();
     }
-    
-    // Practice Areas Management
-    function renderPracticeAreas() {
-        const container = document.getElementById('areas-list');
-        container.innerHTML = '';
+
+    // Render services list
+    function renderServicesList() {
+        const container = document.getElementById('services-list');
+        if (!container) return;
         
-        websiteContent.practiceAreas.forEach((area, index) => {
-            const areaElement = document.createElement('div');
-            areaElement.className = 'area-item';
-            areaElement.innerHTML = `
-                <h3>${area.title}</h3>
-                <p>${area.description.substring(0, 50)}...</p>
-                <div class="item-actions">
-                    <button class="btn edit-area" data-index="${index}"><i class="fas fa-edit"></i></button>
-                    <button class="btn delete-area" data-index="${index}"><i class="fas fa-trash"></i></button>
+        container.innerHTML = websiteData.services.map((service, index) => `
+            <div class="item-card">
+                <div>
+                    <h4>${service.title}</h4>
+                    <p>${service.description.substring(0, 60)}...</p>
                 </div>
-            `;
-            container.appendChild(areaElement);
-        });
-        
-        // Add event listeners
-        document.querySelectorAll('.edit-area').forEach(btn => {
-            btn.addEventListener('click', function() {
-                editPracticeArea(parseInt(this.getAttribute('data-index')));
-            });
-        });
-        
-        document.querySelectorAll('.delete-area').forEach(btn => {
-            btn.addEventListener('click', function() {
-                deletePracticeArea(parseInt(this.getAttribute('data-index')));
-            });
-        });
-    }
-    
-    function editPracticeArea(index) {
-        currentEditItem = { type: 'practiceArea', index: index };
-        const area = websiteContent.practiceAreas[index];
-        
-        document.getElementById('modal-title').textContent = 'Edit Practice Area';
-        
-        const form = document.getElementById('modal-form');
-        form.innerHTML = `
-            <div class="form-group">
-                <label for="edit-area-title">Title</label>
-                <input type="text" id="edit-area-title" value="${area.title}" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-area-desc">Description</label>
-                <textarea id="edit-area-desc" required>${area.description}</textarea>
-            </div>
-        `;
-        
-        document.getElementById('edit-modal').style.display = 'block';
-    }
-    
-    function deletePracticeArea(index) {
-        if (confirm('Are you sure you want to delete this practice area?')) {
-            websiteContent.practiceAreas.splice(index, 1);
-            renderPracticeAreas();
-        }
-    }
-    
-    document.getElementById('add-area').addEventListener('click', function() {
-        currentEditItem = { type: 'practiceArea', index: -1 };
-        
-        document.getElementById('modal-title').textContent = 'Add Practice Area';
-        
-        const form = document.getElementById('modal-form');
-        form.innerHTML = `
-            <div class="form-group">
-                <label for="edit-area-title">Title</label>
-                <input type="text" id="edit-area-title" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-area-desc">Description</label>
-                <textarea id="edit-area-desc" required></textarea>
-            </div>
-        `;
-        
-        document.getElementById('edit-modal').style.display = 'block';
-    });
-    
-    // Blog Posts Management
-    function renderBlogPosts() {
-        const container = document.getElementById('posts-list');
-        container.innerHTML = '';
-        
-        websiteContent.blog.forEach((post, index) => {
-            const postElement = document.createElement('div');
-            postElement.className = 'post-item';
-            postElement.innerHTML = `
-                <h3>${post.title}</h3>
-                <p>${post.date} • ${post.content.substring(0, 50)}...</p>
                 <div class="item-actions">
-                    <button class="btn edit-post" data-index="${index}"><i class="fas fa-edit"></i></button>
-                    <button class="btn delete-post" data-index="${index}"><i class="fas fa-trash"></i></button>
+                    <button class="edit-service" data-index="${index}">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="delete-service" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </div>
-            `;
-            container.appendChild(postElement);
-        });
+            </div>
+        `).join('');
         
-        // Add event listeners
-        document.querySelectorAll('.edit-post').forEach(btn => {
-            btn.addEventListener('click', function() {
-                editBlogPost(parseInt(this.getAttribute('data-index')));
-            });
-        });
-        
-        document.querySelectorAll('.delete-post').forEach(btn => {
-            btn.addEventListener('click', function() {
-                deleteBlogPost(parseInt(this.getAttribute('data-index')));
-            });
-        });
+        addServicesEventListeners();
     }
-    
-    function editBlogPost(index) {
-        currentEditItem = { type: 'blogPost', index: index };
-        const post = websiteContent.blog[index];
-        
-        document.getElementById('modal-title').textContent = 'Edit Blog Post';
-        
-        const form = document.getElementById('modal-form');
-        form.innerHTML = `
-            <div class="form-group">
-                <label for="edit-post-title">Title</label>
-                <input type="text" id="edit-post-title" value="${post.title}" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-post-date">Date</label>
-                <input type="date" id="edit-post-date" value="${post.date}" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-post-content">Content</label>
-                <textarea id="edit-post-content" rows="6" required>${post.content}</textarea>
-            </div>
-        `;
-        
-        document.getElementById('edit-modal').style.display = 'block';
-    }
-    
-    function deleteBlogPost(index) {
-        if (confirm('Are you sure you want to delete this blog post?')) {
-            websiteContent.blog.splice(index, 1);
-            renderBlogPosts();
-        }
-    }
-    
-    document.getElementById('add-post').addEventListener('click', function() {
-        currentEditItem = { type: 'blogPost', index: -1 };
-        
-        document.getElementById('modal-title').textContent = 'Add Blog Post';
-        
-        const form = document.getElementById('modal-form');
-        form.innerHTML = `
-            <div class="form-group">
-                <label for="edit-post-title">Title</label>
-                <input type="text" id="edit-post-title" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-post-date">Date</label>
-                <input type="date" id="edit-post-date" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-post-content">Content</label>
-                <textarea id="edit-post-content" rows="6" required></textarea>
-            </div>
-        `;
-        
-        document.getElementById('edit-modal').style.display = 'block';
-    });
-    
-    // Testimonials Management
-    function renderTestimonials() {
+
+    // Render testimonials list
+    function renderTestimonialsList() {
         const container = document.getElementById('testimonials-list');
-        container.innerHTML = '';
+        if (!container) return;
         
-        websiteContent.testimonials.forEach((testimonial, index) => {
-            const testimonialElement = document.createElement('div');
-            testimonialElement.className = 'testimonial-item';
-            testimonialElement.innerHTML = `
-                <div class="client-info">
-                    <h3>${testimonial.clientName}</h3>
+        container.innerHTML = websiteData.testimonials.map((testimonial, index) => `
+            <div class="item-card">
+                <div>
+                    <h4>${testimonial.clientName}</h4>
                     <p>${testimonial.clientTitle}</p>
+                    <p>"${testimonial.content.substring(0, 60)}..."</p>
                 </div>
-                <p>"${testimonial.content.substring(0, 50)}..."</p>
                 <div class="item-actions">
-                    <button class="btn edit-testimonial" data-index="${index}"><i class="fas fa-edit"></i></button>
-                    <button class="btn delete-testimonial" data-index="${index}"><i class="fas fa-trash"></i></button>
+                    <button class="edit-testimonial" data-index="${index}">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="delete-testimonial" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </div>
-            `;
-            container.appendChild(testimonialElement);
+            </div>
+        `).join('');
+        
+        addTestimonialsEventListeners();
+    }
+
+    // Render blog posts list
+    function renderBlogPostsList() {
+        const container = document.getElementById('posts-list');
+        if (!container) return;
+        
+        container.innerHTML = websiteData.blog.map((post, index) => `
+            <div class="item-card">
+                <div>
+                    <h4>${post.title}</h4>
+                    <p>${new Date(post.date).toLocaleDateString()}</p>
+                    <p>${post.content.substring(0, 60)}...</p>
+                </div>
+                <div class="item-actions">
+                    <button class="edit-post" data-index="${index}">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="delete-post" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+        
+        addBlogPostsEventListeners();
+    }
+
+    // Render credentials list
+    function renderCredentialsList() {
+        const container = document.getElementById('credentials-list');
+        if (!container) return;
+        
+        container.innerHTML = websiteData.about.credentials.map((credential, index) => `
+            <div class="credential-item">
+                <input type="text" value="${credential}" data-index="${index}">
+                <button class="delete-credential" data-index="${index}">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `).join('');
+        
+        addCredentialsEventListeners();
+    }
+
+    // Render social links list
+    function renderSocialLinksList() {
+        const container = document.getElementById('social-links-admin');
+        if (!container) return;
+        
+        container.innerHTML = websiteData.settings.socialLinks.map((link, index) => `
+            <div class="social-item">
+                <select data-index="${index}" data-field="platform">
+                    <option value="facebook" ${link.platform === 'facebook' ? 'selected' : ''}>Facebook</option>
+                    <option value="twitter" ${link.platform === 'twitter' ? 'selected' : ''}>Twitter</option>
+                    <option value="linkedin" ${link.platform === 'linkedin' ? 'selected' : ''}>LinkedIn</option>
+                    <option value="instagram" ${link.platform === 'instagram' ? 'selected' : ''}>Instagram</option>
+                </select>
+                <input type="url" value="${link.url}" data-index="${index}" data-field="url" placeholder="URL">
+                <button class="delete-social" data-index="${index}">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `).join('');
+        
+        addSocialLinksEventListeners();
+    }
+
+    // Add event listeners for services
+    function addServicesEventListeners() {
+        document.querySelectorAll('.edit-service').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                editService(index);
+            });
         });
         
-        // Add event listeners
+        document.querySelectorAll('.delete-service').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                deleteService(index);
+            });
+        });
+    }
+
+    // Add event listeners for testimonials
+    function addTestimonialsEventListeners() {
         document.querySelectorAll('.edit-testimonial').forEach(btn => {
             btn.addEventListener('click', function() {
-                editTestimonial(parseInt(this.getAttribute('data-index')));
+                const index = parseInt(this.getAttribute('data-index'));
+                editTestimonial(index);
             });
         });
         
         document.querySelectorAll('.delete-testimonial').forEach(btn => {
             btn.addEventListener('click', function() {
-                deleteTestimonial(parseInt(this.getAttribute('data-index')));
+                const index = parseInt(this.getAttribute('data-index'));
+                deleteTestimonial(index);
             });
         });
     }
-    
-    function editTestimonial(index) {
-        currentEditItem = { type: 'testimonial', index: index };
-        const testimonial = websiteContent.testimonials[index];
-        
-        document.getElementById('modal-title').textContent = 'Edit Testimonial';
-        
-        const form = document.getElementById('modal-form');
-        form.innerHTML = `
-            <div class="form-group">
-                <label for="edit-testimonial-name">Client Name</label>
-                <input type="text" id="edit-testimonial-name" value="${testimonial.clientName}" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-testimonial-title">Client Title</label>
-                <input type="text" id="edit-testimonial-title" value="${testimonial.clientTitle}" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-testimonial-content">Testimonial</label>
-                <textarea id="edit-testimonial-content" required>${testimonial.content}</textarea>
-            </div>
-        `;
-        
-        document.getElementById('edit-modal').style.display = 'block';
-    }
-    
-    function deleteTestimonial(index) {
-        if (confirm('Are you sure you want to delete this testimonial?')) {
-            websiteContent.testimonials.splice(index, 1);
-            renderTestimonials();
-        }
-    }
-    
-    document.getElementById('add-testimonial').addEventListener('click', function() {
-        currentEditItem = { type: 'testimonial', index: -1 };
-        
-        document.getElementById('modal-title').textContent = 'Add Testimonial';
-        
-        const form = document.getElementById('modal-form');
-        form.innerHTML = `
-            <div class="form-group">
-                <label for="edit-testimonial-name">Client Name</label>
-                <input type="text" id="edit-testimonial-name" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-testimonial-title">Client Title</label>
-                <input type="text" id="edit-testimonial-title" required>
-            </div>
-            <div class="form-group">
-                <label for="edit-testimonial-content">Testimonial</label>
-                <textarea id="edit-testimonial-content" required></textarea>
-            </div>
-        `;
-        
-        document.getElementById('edit-modal').style.display = 'block';
-    });
-    
-    // Credentials Management
-    function renderCredentials() {
-        const container = document.getElementById('credentials-list');
-        container.innerHTML = '';
-        
-        websiteContent.about.credentials.forEach((credential, index) => {
-            const credentialElement = document.createElement('div');
-            credentialElement.className = 'credential-item';
-            credentialElement.innerHTML = `
-                <input type="text" value="${credential}" class="credential-input" data-index="${index}">
-                <button class="btn delete-credential" data-index="${index}"><i class="fas fa-times"></i></button>
-            `;
-            container.appendChild(credentialElement);
+
+    // Add event listeners for blog posts
+    function addBlogPostsEventListeners() {
+        document.querySelectorAll('.edit-post').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                editBlogPost(index);
+            });
         });
         
-        // Add event listeners
+        document.querySelectorAll('.delete-post').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                deleteBlogPost(index);
+            });
+        });
+    }
+
+    // Add event listeners for credentials
+    function addCredentialsEventListeners() {
+        document.querySelectorAll('.credential-item input').forEach(input => {
+            input.addEventListener('change', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                const value = this.value;
+                updateCredential(index, value);
+            });
+        });
+        
         document.querySelectorAll('.delete-credential').forEach(btn => {
             btn.addEventListener('click', function() {
-                deleteCredential(parseInt(this.getAttribute('data-index')));
+                const index = parseInt(this.getAttribute('data-index'));
+                deleteCredential(index);
+            });
+        });
+    }
+
+    // Add event listeners for social links
+    function addSocialLinksEventListeners() {
+        document.querySelectorAll('.social-item select').forEach(select => {
+            select.addEventListener('change', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                const field = this.getAttribute('data-field');
+                const value = this.value;
+                updateSocialLink(index, field, value);
             });
         });
         
-        document.querySelectorAll('.credential-input').forEach(input => {
+        document.querySelectorAll('.social-item input').forEach(input => {
             input.addEventListener('change', function() {
-                updateCredential(parseInt(this.getAttribute('data-index')), this.value);
+                const index = parseInt(this.getAttribute('data-index'));
+                const field = this.getAttribute('data-field');
+                const value = this.value;
+                updateSocialLink(index, field, value);
             });
         });
-    }
-    
-    function updateCredential(index, value) {
-        websiteContent.about.credentials[index] = value;
-    }
-    
-    function deleteCredential(index) {
-        websiteContent.about.credentials.splice(index, 1);
-        renderCredentials();
-    }
-    
-    document.getElementById('add-credential').addEventListener('click', function() {
-        websiteContent.about.credentials.push('New Credential');
-        renderCredentials();
-        // Scroll to bottom and focus the new input
-        const container = document.getElementById('credentials-list');
-        const lastInput = container.lastElementChild.querySelector('input');
-        lastInput.focus();
-        lastInput.select();
-    });
-    
-    // Social Links Management
-    function renderSocialLinks() {
-        const container = document.getElementById('social-links-admin');
-        container.innerHTML = '';
         
-        websiteContent.settings.socialLinks.forEach((link, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'social-link-item';
-            linkElement.innerHTML = `
-                <select class="social-platform" data-index="${index}">
-                    <option value="facebook" ${link.platform === 'facebook' ? 'selected' : ''}>Facebook</option>
-                    <option value="twitter" ${link.platform === 'twitter' ? 'selected' : ''}>Twitter</option>
-                    <option value="linkedin" ${link.platform === 'linkedin' ? 'selected' : ''}>LinkedIn</option>
-                    <option value="instagram" ${link.platform === 'instagram' ? 'selected' : ''}>Instagram</option>
-                    <option value="youtube" ${link.platform === 'youtube' ? 'selected' : ''}>YouTube</option>
-                </select>
-                <input type="url" value="${link.url}" class="social-url" data-index="${index}" placeholder="URL">
-                <button class="btn delete-social" data-index="${index}"><i class="fas fa-times"></i></button>
-            `;
-            container.appendChild(linkElement);
-        });
-        
-        // Add event listeners
         document.querySelectorAll('.delete-social').forEach(btn => {
             btn.addEventListener('click', function() {
-                deleteSocialLink(parseInt(this.getAttribute('data-index')));
+                const index = parseInt(this.getAttribute('data-index'));
+                deleteSocialLink(index);
             });
         });
+    }
+
+    // Set up all event listeners
+    function setupEventListeners() {
+        // Add buttons
+        document.getElementById('add-service').addEventListener('click', addNewService);
+        document.getElementById('add-testimonial').addEventListener('click', addNewTestimonial);
+        document.getElementById('add-post').addEventListener('click', addNewBlogPost);
+        document.getElementById('add-credential').addEventListener('click', addNewCredential);
+        document.getElementById('add-social').addEventListener('click', addNewSocialLink);
         
-        document.querySelectorAll('.social-platform').forEach(select => {
-            select.addEventListener('change', function() {
-                updateSocialLink(parseInt(this.getAttribute('data-index')), 'platform', this.value);
-            });
-        });
+        // Save all button
+        document.getElementById('save-all').addEventListener('click', saveAllChanges);
         
-        document.querySelectorAll('.social-url').forEach(input => {
-            input.addEventListener('change', function() {
-                updateSocialLink(parseInt(this.getAttribute('data-index')), 'url', this.value);
-            });
-        });
+        // Preview button
+        document.getElementById('preview').addEventListener('click', previewWebsite);
+        
+        // Modal buttons
+        document.getElementById('save-modal').addEventListener('click', saveModalChanges);
+        document.getElementById('cancel-modal').addEventListener('click', closeModal);
+        document.querySelector('.close-modal').addEventListener('click', closeModal);
     }
-    
-    function updateSocialLink(index, field, value) {
-        websiteContent.settings.socialLinks[index][field] = value;
+
+    // Add new service
+    function addNewService() {
+        currentEditItem = { type: 'service', index: -1 };
+        showModal(
+            'Add New Service',
+            `
+            <div class="form-group">
+                <label for="modal-title">Service Title</label>
+                <input type="text" id="modal-title" required>
+            </div>
+            <div class="form-group">
+                <label for="modal-description">Description</label>
+                <textarea id="modal-description" required></textarea>
+            </div>
+            `
+        );
     }
-    
-    function deleteSocialLink(index) {
-        websiteContent.settings.socialLinks.splice(index, 1);
-        renderSocialLinks();
+
+    // Add new testimonial
+    function addNewTestimonial() {
+        currentEditItem = { type: 'testimonial', index: -1 };
+        showModal(
+            'Add New Testimonial',
+            `
+            <div class="form-group">
+                <label for="modal-client-name">Client Name</label>
+                <input type="text" id="modal-client-name" required>
+            </div>
+            <div class="form-group">
+                <label for="modal-client-title">Client Title</label>
+                <input type="text" id="modal-client-title">
+            </div>
+            <div class="form-group">
+                <label for="modal-content">Testimonial Content</label>
+                <textarea id="modal-content" required></textarea>
+            </div>
+            `
+        );
     }
-    
-    document.getElementById('add-social').addEventListener('click', function() {
-        websiteContent.settings.socialLinks.push({
+
+    // Add new blog post
+    function addNewBlogPost() {
+        currentEditItem = { type: 'blog', index: -1 };
+        showModal(
+            'Add New Blog Post',
+            `
+            <div class="form-group">
+                <label for="modal-title">Post Title</label>
+                <input type="text" id="modal-title" required>
+            </div>
+            <div class="form-group">
+                <label for="modal-date">Date</label>
+                <input type="date" id="modal-date" required>
+            </div>
+            <div class="form-group">
+                <label for="modal-content">Post Content</label>
+                <textarea id="modal-content" required rows="8"></textarea>
+            </div>
+            `
+        );
+    }
+
+    // Add new credential
+    function addNewCredential() {
+        if (!websiteData.about.credentials) {
+            websiteData.about.credentials = [];
+        }
+        websiteData.about.credentials.push("New Credential");
+        renderCredentialsList();
+        
+        // Focus the new input
+        const inputs = document.querySelectorAll('.credential-item input');
+        if (inputs.length > 0) {
+            const newInput = inputs[inputs.length - 1];
+            newInput.focus();
+            newInput.select();
+        }
+    }
+
+    // Add new social link
+    function addNewSocialLink() {
+        if (!websiteData.settings.socialLinks) {
+            websiteData.settings.socialLinks = [];
+        }
+        websiteData.settings.socialLinks.push({
             platform: 'facebook',
             url: ''
         });
-        renderSocialLinks();
-    });
-    
-    // Modal functionality
-    document.getElementById('save-modal').addEventListener('click', function() {
-        if (!currentEditItem) return;
+        renderSocialLinksList();
+    }
+
+    // Edit service
+    function editService(index) {
+        const service = websiteData.services[index];
+        currentEditItem = { type: 'service', index: index };
         
-        switch(currentEditItem.type) {
-            case 'practiceArea':
-                const areaData = {
-                    title: document.getElementById('edit-area-title').value,
-                    description: document.getElementById('edit-area-desc').value
-                };
-                
-                if (currentEditItem.index === -1) {
-                    // Add new
-                    websiteContent.practiceAreas.push(areaData);
-                } else {
-                    // Update existing
-                    websiteContent.practiceAreas[currentEditItem.index] = areaData;
-                }
-                renderPracticeAreas();
-                break;
-                
-            case 'blogPost':
-                const postData = {
-                    title: document.getElementById('edit-post-title').value,
-                    date: document.getElementById('edit-post-date').value,
-                    content: document.getElementById('edit-post-content').value
-                };
-                
-                if (currentEditItem.index === -1) {
-                    // Add new
-                    websiteContent.blog.push(postData);
-                } else {
-                    // Update existing
-                    websiteContent.blog[currentEditItem.index] = postData;
-                }
-                renderBlogPosts();
-                break;
-                
-            case 'testimonial':
-                const testimonialData = {
-                    clientName: document.getElementById('edit-testimonial-name').value,
-                    clientTitle: document.getElementById('edit-testimonial-title').value,
-                    content: document.getElementById('edit-testimonial-content').value
-                };
-                
-                if (currentEditItem.index === -1) {
-                    // Add new
-                    websiteContent.testimonials.push(testimonialData);
-                } else {
-                    // Update existing
-                    websiteContent.testimonials[currentEditItem.index] = testimonialData;
-                }
-                renderTestimonials();
-                break;
+        showModal(
+            'Edit Service',
+            `
+            <div class="form-group">
+                <label for="modal-title">Service Title</label>
+                <input type="text" id="modal-title" value="${service.title}" required>
+            </div>
+            <div class="form-group">
+                <label for="modal-description">Description</label>
+                <textarea id="modal-description" required>${service.description}</textarea>
+            </div>
+            `
+        );
+    }
+
+    // Edit testimonial
+    function editTestimonial(index) {
+        const testimonial = websiteData.testimonials[index];
+        currentEditItem = { type: 'testimonial', index: index };
+        
+        showModal(
+            'Edit Testimonial',
+            `
+            <div class="form-group">
+                <label for="modal-client-name">Client Name</label>
+                <input type="text" id="modal-client-name" value="${testimonial.clientName}" required>
+            </div>
+            <div class="form-group">
+                <label for="modal-client-title">Client Title</label>
+                <input type="text" id="modal-client-title" value="${testimonial.clientTitle || ''}">
+            </div>
+            <div class="form-group">
+                <label for="modal-content">Testimonial Content</label>
+                <textarea id="modal-content" required>${testimonial.content}</textarea>
+            </div>
+            `
+        );
+    }
+
+    // Edit blog post
+    function editBlogPost(index) {
+        const post = websiteData.blog[index];
+        currentEditItem = { type: 'blog', index: index };
+        
+        showModal(
+            'Edit Blog Post',
+            `
+            <div class="form-group">
+                <label for="modal-title">Post Title</label>
+                <input type="text" id="modal-title" value="${post.title}" required>
+            </div>
+            <div class="form-group">
+                <label for="modal-date">Date</label>
+                <input type="date" id="modal-date" value="${post.date}" required>
+            </div>
+            <div class="form-group">
+                <label for="modal-content">Post Content</label>
+                <textarea id="modal-content" required rows="8">${post.content}</textarea>
+            </div>
+            `
+        );
+    }
+
+    // Delete service
+    function deleteService(index) {
+        if (confirm('Are you sure you want to delete this service?')) {
+            websiteData.services.splice(index, 1);
+            renderServicesList();
         }
-        
-        closeModal();
-    });
-    
-    document.getElementById('cancel-modal').addEventListener('click', closeModal);
-    document.querySelector('.close-modal').addEventListener('click', closeModal);
-    
+    }
+
+    // Delete testimonial
+    function deleteTestimonial(index) {
+        if (confirm('Are you sure you want to delete this testimonial?')) {
+            websiteData.testimonials.splice(index, 1);
+            renderTestimonialsList();
+        }
+    }
+
+    // Delete blog post
+    function deleteBlogPost(index) {
+        if (confirm('Are you sure you want to delete this blog post?')) {
+            websiteData.blog.splice(index, 1);
+            renderBlogPostsList();
+        }
+    }
+
+    // Delete credential
+    function deleteCredential(index) {
+        websiteData.about.credentials.splice(index, 1);
+        renderCredentialsList();
+    }
+
+    // Delete social link
+    function deleteSocialLink(index) {
+        websiteData.settings.socialLinks.splice(index, 1);
+        renderSocialLinksList();
+    }
+
+    // Update credential
+    function updateCredential(index, value) {
+        websiteData.about.credentials[index] = value;
+    }
+
+    // Update social link
+    function updateSocialLink(index, field, value) {
+        websiteData.settings.socialLinks[index][field] = value;
+    }
+
+    // Show modal
+    function showModal(title, content) {
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('modal-form').innerHTML = content;
+        document.getElementById('edit-modal').style.display = 'flex';
+    }
+
+    // Close modal
     function closeModal() {
         document.getElementById('edit-modal').style.display = 'none';
         currentEditItem = null;
     }
-    
-    // Save all changes
-    document.getElementById('save-all').addEventListener('click', function() {
-        // Update content from forms
-        websiteContent.home = {
-            heroTitle: document.getElementById('hero-title').value,
-            heroSubtitle: document.getElementById('hero-subtitle').value,
-            ctaPrimary: document.getElementById('cta-primary').value,
-            ctaSecondary: document.getElementById('cta-secondary').value
-        };
+
+    // Save modal changes
+    function saveModalChanges() {
+        if (!currentEditItem) return;
         
-        websiteContent.about = {
-            title: document.getElementById('about-title').value,
-            content: document.getElementById('about-text').value,
-            credentials: websiteContent.about.credentials
-        };
+        switch (currentEditItem.type) {
+            case 'service':
+                const serviceTitle = document.getElementById('modal-title').value;
+                const serviceDescription = document.getElementById('modal-description').value;
+                
+                const serviceData = {
+                    title: serviceTitle,
+                    description: serviceDescription
+                };
+                
+                if (currentEditItem.index === -1) {
+                    // Add new service
+                    if (!websiteData.services) websiteData.services = [];
+                    websiteData.services.push(serviceData);
+                } else {
+                    // Update existing service
+                    websiteData.services[currentEditItem.index] = serviceData;
+                }
+                renderServicesList();
+                break;
+                
+            case 'testimonial':
+                const clientName = document.getElementById('modal-client-name').value;
+                const clientTitle = document.getElementById('modal-client-title').value;
+                const testimonialContent = document.getElementById('modal-content').value;
+                
+                const testimonialData = {
+                    clientName: clientName,
+                    clientTitle: clientTitle,
+                    content: testimonialContent
+                };
+                
+                if (currentEditItem.index === -1) {
+                    // Add new testimonial
+                    if (!websiteData.testimonials) websiteData.testimonials = [];
+                    websiteData.testimonials.push(testimonialData);
+                } else {
+                    // Update existing testimonial
+                    websiteData.testimonials[currentEditItem.index] = testimonialData;
+                }
+                renderTestimonialsList();
+                break;
+                
+            case 'blog':
+                const postTitle = document.getElementById('modal-title').value;
+                const postDate = document.getElementById('modal-date').value;
+                const postContent = document.getElementById('modal-content').value;
+                
+                const postData = {
+                    title: postTitle,
+                    date: postDate,
+                    content: postContent
+                };
+                
+                if (currentEditItem.index === -1) {
+                    // Add new post
+                    if (!websiteData.blog) websiteData.blog = [];
+                    websiteData.blog.push(postData);
+                } else {
+                    // Update existing post
+                    websiteData.blog[currentEditItem.index] = postData;
+                }
+                renderBlogPostsList();
+                break;
+        }
         
-        websiteContent.contact = {
-            title: document.getElementById('contact-title').value,
-            address: document.getElementById('address').value,
-            phone: document.getElementById('phone').value,
-            email: document.getElementById('email').value,
-            hours: document.getElementById('hours').value
-        };
-        
-        websiteContent.settings = {
-            firmName: document.getElementById('firm-name').value,
-            copyright: document.getElementById('copyright').value,
-            socialLinks: websiteContent.settings.socialLinks
-        };
-        
-        // Save to JSON files
-        saveContent();
-    });
-    
-    function saveContent() {
-        // Split content into two files
-        const mainContent = {
-            home: websiteContent.home,
-            practiceAreas: websiteContent.practiceAreas,
-            about: websiteContent.about,
-            testimonials: websiteContent.testimonials,
-            contact: websiteContent.contact,
-            settings: websiteContent.settings
-        };
-        
-        const blogContent = websiteContent.blog;
-        
-        // In a real implementation, you would send this to a server to save
-        // For this demo, we'll simulate it with localStorage
-        localStorage.setItem('websiteContent', JSON.stringify(mainContent));
-        localStorage.setItem('websiteBlog', JSON.stringify(blogContent));
-        
-        alert('All changes saved successfully!');
+        closeModal();
     }
-    
-    // Preview functionality
-    document.getElementById('preview').addEventListener('click', function() {
-        // In a real implementation, this would open a preview window
-        alert('In a complete implementation, this would open a preview of the website with your changes.');
-    });
-    
-    // Initialize
-    loadContent();
+
+    // Save all changes
+    function saveAllChanges() {
+        // Update from form fields
+        websiteData.home.heroTitle = document.getElementById('hero-title').value;
+        websiteData.home.heroSubtitle = document.getElementById('hero-subtitle').value;
+        
+        websiteData.about.title = document.getElementById('about-title').value;
+        websiteData.about.content = document.getElementById('about-text').value;
+        
+        websiteData.contact.title = document.getElementById('contact-title').value;
+        websiteData.contact.address = document.getElementById('address').value;
+        websiteData.contact.phone = document.getElementById('phone').value;
+        websiteData.contact.email = document.getElementById('email').value;
+        websiteData.contact.hours = document.getElementById('hours').value;
+        
+        websiteData.settings.firmName = document.getElementById('firm-name').value;
+        
+        // Save to localStorage (in a real app, you would send to a server)
+        localStorage.setItem('lawWebsiteContent', JSON.stringify({
+            home: websiteData.home,
+            services: websiteData.services,
+            about: websiteData.about,
+            testimonials: websiteData.testimonials,
+            contact: websiteData.contact,
+            settings: websiteData.settings
+        }));
+        
+        localStorage.setItem('lawWebsiteBlog', JSON.stringify(websiteData.blog));
+        
+        alert('All changes have been saved successfully!');
+    }
+
+    // Preview website
+    function previewWebsite() {
+        // Save changes first
+        saveAllChanges();
+        
+        // Open in new tab
+        window.open('../index.html', '_blank');
+    }
+
+    // Initialize the admin panel
+    initAdminPanel();
 });

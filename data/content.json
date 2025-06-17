@@ -1,64 +1,74 @@
 {
     "home": {
-        "heroTitle": "Expert Legal Solutions You Can Trust",
-        "heroSubtitle": "With over 15 years of experience, we provide dedicated legal representation to protect your rights and achieve the best possible outcomes.",
-        "ctaPrimary": "Free Consultation",
-        "ctaSecondary": "Call Now"
+        "heroTitle": "Your Trusted Legal Partners",
+        "heroSubtitle": "With over 20 years of combined experience, we provide exceptional legal representation tailored to your unique needs."
     },
-    "practiceAreas": [
+    "services": [
         {
-            "title": "Criminal Defense",
-            "description": "Protecting your rights with aggressive defense strategies for all criminal charges including DUI, theft, assault, and more."
+            "title": "Corporate Law",
+            "description": "Comprehensive legal solutions for businesses including formation, contracts, and compliance."
         },
         {
             "title": "Family Law",
-            "description": "Compassionate representation for divorce, child custody, alimony, and other family law matters."
+            "description": "Sensitive handling of divorce, child custody, and other family-related legal matters."
         },
         {
-            "title": "Property Disputes",
-            "description": "Resolving complex property disputes including landlord-tenant issues, inheritance claims, and real estate litigation."
+            "title": "Real Estate Law",
+            "description": "Expert guidance for property transactions, disputes, and development projects."
+        },
+        {
+            "title": "Criminal Defense",
+            "description": "Aggressive representation for individuals facing criminal charges at any level."
         }
     ],
     "about": {
-        "title": "About Our Law Firm",
-        "content": "Our firm was founded with the goal of providing exceptional legal services with a personal touch. We believe every client deserves dedicated attention and customized legal strategies to achieve their goals.",
+        "title": "About Our Firm",
+        "content": "Founded in 2003, Law & Partners has grown from a small practice to one of the most respected law firms in the region. Our team of dedicated attorneys brings diverse expertise to every case, ensuring our clients receive the highest quality legal representation.",
         "credentials": [
-            "15+ Years of Legal Experience",
-            "500+ Cases Successfully Handled",
-            "Personalized Attention to Each Client",
-            "Member of State Bar Association"
+            "20+ Years Combined Experience",
+            "1000+ Cases Successfully Handled",
+            "AV Preeminent® Rated Attorneys",
+            "Named Best Law Firm 2023"
         ]
     },
     "testimonials": [
         {
-            "clientName": "Rajesh Kumar",
-            "clientTitle": "Criminal Defense Client",
-            "content": "I was facing serious criminal charges and was terrified. Your expertise and dedication resulted in all charges being dropped. I can't thank you enough for saving my future."
+            "clientName": "Sarah Johnson",
+            "clientTitle": "CEO, TechStart Inc.",
+            "content": "The team at Law & Partners saved our business during a critical contract dispute. Their expertise and strategic approach resulted in a favorable settlement that allowed our company to continue growing."
         },
         {
-            "clientName": "Priya Sharma",
+            "clientName": "Michael Rodriguez",
+            "clientTitle": "Real Estate Investor",
+            "content": "Their real estate team handled a complex commercial property acquisition with exceptional skill. Every detail was managed perfectly, and they saved us thousands in potential liabilities."
+        },
+        {
+            "clientName": "Emily Chen",
             "clientTitle": "Family Law Client",
-            "content": "The divorce process was emotionally draining, but you guided me through every step with compassion and professionalism. I got fair settlement thanks to your efforts."
+            "content": "During my difficult divorce, they provided compassionate yet strong representation. I felt protected throughout the entire process and achieved a fair settlement."
         }
     ],
     "contact": {
-        "title": "Get In Touch",
-        "address": "123 Legal Street, Suite 456, New Delhi, India 110001",
-        "phone": "+91 98765 43210",
-        "email": "contact@lawfirm.com",
-        "hours": "Monday-Friday: 9:00 AM - 6:00 PM, Saturday: 10:00 AM - 2:00 PM"
+        "title": "Contact Our Office",
+        "address": "123 Justice Avenue, Suite 500\nNew York, NY 10001",
+        "phone": "+1 (212) 555-0100",
+        "email": "contact@lawandpartners.com",
+        "hours": "Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: By Appointment"
     },
     "settings": {
-        "firmName": "Legal Solutions",
-        "copyright": "© 2023 Legal Solutions. All rights reserved.",
+        "firmName": "Law & Partners",
         "socialLinks": [
             {
                 "platform": "facebook",
-                "url": "https://facebook.com"
+                "url": "https://facebook.com/lawandpartners"
             },
             {
                 "platform": "linkedin",
-                "url": "https://linkedin.com"
+                "url": "https://linkedin.com/company/law-and-partners"
+            },
+            {
+                "platform": "twitter",
+                "url": "https://twitter.com/law_partners"
             }
         ]
     }
