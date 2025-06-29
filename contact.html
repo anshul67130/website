@@ -9,13 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> +91 98765 43210</span>
+                <span><i class="fas fa-envelope"></i> contact@lawfirm.com</span>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">Law<span>Firm</span></a>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="contact.html" class="btn">Contact</a></li>
@@ -43,11 +59,11 @@
                     <h2>Send Us a Message</h2>
                     <form id="contactForm">
                         <div class="form-group">
-                            <label for="name">Full Name</label>
+                            <label for="name">Full Name*</label>
                             <input type="text" id="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Email*</label>
                             <input type="email" id="email" required>
                         </div>
                         <div class="form-group">
@@ -61,11 +77,12 @@
                                 <option value="corporate">Corporate Law</option>
                                 <option value="criminal">Criminal Defense</option>
                                 <option value="family">Family Law</option>
+                                <option value="realestate">Real Estate</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="message">Your Message</label>
+                            <label for="message">Your Message*</label>
                             <textarea id="message" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn">Send Message</button>
@@ -98,7 +115,7 @@
             </div>
 
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.366981188722!2d77.2063723150824!3d28.62873998242376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f1!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1624457356785!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.366981188722!2d77.2063723150824!3d28.62873998242376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f1!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1624457356785!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" title="LawFirm Location Map"></iframe>
             </div>
         </div>
     </section>
@@ -158,5 +175,14 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact">
+        <a href="https://wa.me/919876543210" class="whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

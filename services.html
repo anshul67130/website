@@ -1,224 +1,1155 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services | LawFirm</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="contact-info">
-                <span><i class="fas fa-phone"></i> +91 98765 43210</span>
-                <span><i class="fas fa-envelope"></i> contact@lawfirm.com</span>
-            </div>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </div>
+/* Global Styles */
+:root {
+    --primary: #000080;
+    --secondary: #FFD700;
+    --accent: #FFFFFF;
+    --text: #333333;
+    --light-gray: #F5F5F5;
+    --dark-gray: #777777;
+}
 
-    <!-- Navigation -->
-<header>
-    <div class="container">
-        <a href="index.html" class="logo">Law<span>Firm</span></a>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html" class="btn">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="mobile-menu">
-            <i class="fas fa-bars"></i>
-        </div>
-    </div>
-</header>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <!-- Services Hero -->
-    <section class="page-hero" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/services-bg.jpg');">
-        <div class="container">
-            <h1>Our Legal Services</h1>
-            <p>Comprehensive solutions for all your legal needs</p>
-        </div>
-    </section>
+body {
+    font-family: 'Lato', sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-    <!-- Practice Areas Detail -->
-    <section class="service-details">
-        <div class="container">
-            <div class="service-tabs">
-                <button class="tab-btn active" data-tab="corporate">Corporate Law</button>
-                <button class="tab-btn" data-tab="criminal">Criminal Defense</button>
-                <button class="tab-btn" data-tab="family">Family Law</button>
-                <button class="tab-btn" data-tab="realestate">Real Estate</button>
-            </div>
+body.menu-open {
+    overflow: hidden;
+}
 
-            <div class="tab-content active" id="corporate">
-                <div class="service-content">
-                    <h2>Corporate Legal Services</h2>
-                    <p>We provide expert guidance on all aspects of corporate law, helping businesses navigate complex legal landscapes with strategic solutions.</p>
-                    
-                    <div class="service-features">
-                        <div class="feature">
-                            <i class="fas fa-file-contract"></i>
-                            <h3>Contract Drafting</h3>
-                            <p>Comprehensive agreements tailored to your business needs</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-handshake"></i>
-                            <h3>Mergers & Acquisitions</h3>
-                            <p>End-to-end legal support for business transactions</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-balance-scale"></i>
-                            <h3>Compliance Advisory</h3>
-                            <p>Ensuring your business meets all regulatory requirements</p>
-                        </div>
-                    </div>
-                    
-                    <div class="case-study">
-                        <h3>Recent Success</h3>
-                        <p>Successfully represented a Fortune 500 company in a ₹200 crore acquisition deal, navigating complex regulatory approvals and negotiations.</p>
-                    </div>
-                </div>
-            </div>
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--text);
+}
 
-            <div class="tab-content" id="criminal">
-                <!-- Similar structure for Criminal Defense -->
-            </div>
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
 
-            <!-- Other tabs content -->
-        </div>
-    </section>
+.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
 
-    <!-- Process Section -->
-    <section class="process">
-        <div class="container">
-            <h2>Our Legal Process</h2>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Initial Consultation</h3>
-                    <p>Free case evaluation to understand your situation</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Case Strategy</h3>
-                    <p>Developing a customized legal approach</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Execution</h3>
-                    <p>Aggressive representation in court or negotiations</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Resolution</h3>
-                    <p>Achieving the best possible outcome</p>
-                </div>
-            </div>
-        </div>
-    </section>
+.btn:hover {
+    background: var(--secondary);
+    color: var(--text);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
 
-    <!-- Pricing Section -->
-    <section class="pricing">
-        <div class="container">
-            <h2>Transparent Pricing</h2>
-            <div class="pricing-options">
-                <div class="option">
-                    <h3>Consultation</h3>
-                    <div class="price">Free</div>
-                    <ul>
-                        <li>30-minute meeting</li>
-                        <li>Case evaluation</li>
-                        <li>Basic legal advice</li>
-                    </ul>
-                    <a href="contact.html" class="btn">Book Now</a>
-                </div>
-                <div class="option featured">
-                    <h3>Standard Representation</h3>
-                    <div class="price">₹25,000+</div>
-                    <ul>
-                        <li>Case preparation</li>
-                        <li>Court appearances</li>
-                        <li>Document drafting</li>
-                    </ul>
-                    <a href="contact.html" class="btn">Get Started</a>
-                </div>
-                <div class="option">
-                    <h3>Corporate Retainer</h3>
-                    <div class="price">Custom</div>
-                    <ul>
-                        <li>Ongoing legal support</li>
-                        <li>Contract reviews</li>
-                        <li>Priority access</li>
-                    </ul>
-                    <a href="contact.html" class="btn">Contact Us</a>
-                </div>
-            </div>
-        </div>
-    </section>
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Discuss Your Case?</h2>
-            <p>Contact us today for a confidential consultation</p>
-            <a href="contact.html" class="btn btn-large">Schedule Consultation</a>
-        </div>
-    </section>
+/* Header Styles */
+.top-bar {
+    background: var(--primary);
+    color: white;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>LawFirm</h3>
-                    <p>Providing expert legal services since 2005</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Practice Areas</h3>
-                    <ul>
-                        <li><a href="services.html#corporate">Corporate Law</a></li>
-                        <li><a href="services.html#criminal">Criminal Defense</a></li>
-                        <li><a href="services.html#family">Family Law</a></li>
-                        <li><a href="services.html#realestate">Real Estate</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Legal Street, Delhi 110001</p>
-                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-                    <p><i class="fas fa-envelope"></i> contact@lawfirm.com</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 LawFirm. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+.top-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contact-info span {
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.contact-info i, .social-icons a {
+    margin-right: 5px;
+}
+
+.social-icons a {
+    color: white;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--secondary);
+}
+
+header {
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--secondary);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+    color: var(--primary);
+}
+
+nav ul li a.active:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+}
+
+.mobile-menu {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary);
+}
+
+/* Hero Section */
+.hero, .page-hero {
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 120px 0;
+    position: relative;
+}
+
+.hero h1, .page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero p, .page-hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Why Choose Us */
+.why-us {
+    padding: 80px 0;
+    background: var(--light-gray);
+    text-align: center;
+}
+
+.why-us h2 {
+    margin-bottom: 50px;
+    font-size: 2.2rem;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.feature i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    margin-bottom: 15px;
+}
+
+/* Practice Areas */
+.practice-areas {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.practice-areas h2 {
+    margin-bottom: 50px;
+    font-size: 2.2rem;
+}
+
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.area {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.area:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-10px);
+}
+
+.area:hover i, .area:hover a {
+    color: var(--secondary);
+}
+
+.area i {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.area h3 {
+    margin-bottom: 15px;
+}
+
+.area a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    margin-top: 15px;
+    transition: color 0.3s ease;
+}
+
+.area:hover a {
+    color: var(--secondary);
+}
+
+/* Testimonials */
+.testimonials {
+    padding: 80px 0;
+    background: var(--light-gray);
+    text-align: center;
+}
+
+.testimonials h2 {
+    margin-bottom: 50px;
+    font-size: 2.2rem;
+}
+
+.testimonial-slider {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.testimonial {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.testimonial.active {
+    opacity: 1;
+    position: relative;
+}
+
+.testimonial p {
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.client {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.client h4 {
+    margin-bottom: 5px;
+}
+
+.client span {
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+/* CTA Section */
+.cta {
+    padding: 80px 0;
+    background: var(--primary);
+    color: white;
+    text-align: center;
+}
+
+.cta h2 {
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
+.cta p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta .btn {
+    background: var(--secondary);
+    color: var(--text);
+}
+
+.cta .btn:hover {
+    background: white;
+    color: var(--text);
+}
+
+/* Footer */
+footer {
+    background: #222;
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h3 {
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.footer-col p {
+    margin-bottom: 15px;
+    color: #ccc;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: var(--secondary);
+}
+
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: #333;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--secondary);
+    color: var(--text);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* Floating Contact */
+.floating-contact {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+}
+
+.whatsapp {
+    display: block;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 1.8rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.whatsapp:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Page Hero Styles */
+.page-hero {
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+}
+
+.page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.page-hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* Attorney Profile */
+.attorney-profile {
+    padding: 80px 0;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.profile-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.profile-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.profile-content h3 {
+    color: var(--dark-gray);
+    margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.profile-content p {
+    margin-bottom: 30px;
+}
+
+.education, .memberships {
+    margin-bottom: 30px;
+}
+
+.education h4, .memberships h4 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.education ul, .memberships ul {
+    list-style-position: inside;
+}
+
+/* Philosophy Section */
+.philosophy {
+    padding: 80px 0;
+    background: var(--light-gray);
+    text-align: center;
+}
+
+.philosophy-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.philosophy-content p {
+    font-size: 1.3rem;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.signature img {
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+/* Achievements */
+.achievements {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.achievement {
+    padding: 30px;
+}
+
+.achievement i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.achievement h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Media Section */
+.media {
+    padding: 60px 0;
+    background: white;
+    text-align: center;
+}
+
+.media-logos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.media-logos img {
+    height: 40px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.media-logos img:hover {
+    opacity: 1;
+}
+
+/* Team Section */
+.team {
+    padding: 80px 0;
+    background: var(--light-gray);
+    text-align: center;
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.member {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.member:hover {
+    transform: translateY(-10px);
+}
+
+.member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* Service Details */
+.service-details {
+    padding: 80px 0;
+}
+
+.service-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    border-bottom: 3px solid var(--primary);
+    color: var(--primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.service-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.service-features .feature {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.service-features .feature i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.case-study {
+    background: var(--light-gray);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+/* Process Section */
+.process {
+    padding: 80px 0;
+    background: var(--light-gray);
+    text-align: center;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.step {
+    position: relative;
+    padding: 30px 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.step-number {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Pricing Section */
+.pricing {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.pricing-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.option {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.option:hover {
+    transform: translateY(-10px);
+}
+
+.option.featured {
+    border: 2px solid var(--primary);
+    transform: scale(1.05);
+}
+
+.price {
+    font-size: 2rem;
+    color: var(--primary);
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.option ul {
+    list-style: none;
+    text-align: left;
+    margin: 30px 0;
+}
+
+.option ul li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.option ul li:before {
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+}
+
+/* Blog Styles */
+.blog-content {
+    padding: 80px 0;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+.blog-post {
+    margin-bottom: 50px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+}
+
+.blog-post img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.post-meta {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+.blog-post h2 {
+    padding: 0 20px 20px;
+    font-size: 1.5rem;
+}
+
+.blog-post h2 a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-post h2 a:hover {
+    color: var(--primary);
+}
+
+.blog-post p {
+    padding: 0 20px 20px;
+}
+
+.read-more {
+    display: inline-block;
+    margin: 0 20px 20px;
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: var(--secondary);
+}
+
+/* Sidebar */
+.sidebar-widget {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.sidebar-widget h3 {
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.sidebar-widget ul {
+    list-style: none;
+}
+
+.sidebar-widget ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar-widget ul li a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sidebar-widget ul li a:hover {
+    color: var(--primary);
+}
+
+.popular-post {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.popular-post img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.popular-post h4 {
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.popular-post h4 a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.popular-post h4 a:hover {
+    color: var(--primary);
+}
+
+.popular-post .date {
+    color: var(--dark-gray);
+    font-size: 0.8rem;
+}
+
+.subscribe-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Contact Page */
+.contact-content {
+    padding: 80px 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.contact-form h2, .contact-info h2 {
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.info-item {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.info-item h3 {
+    margin-bottom: 10px;
+}
+
+.map-container {
+    margin-top: 60px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .hero h1, .page-hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-tabs {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu {
+        display: block;
+    }
+    
+    nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        z-index: 999;
+        padding-top: 80px;
+    }
+    
+    nav.active {
+        left: 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        padding: 0 30px;
+    }
+    
+    nav ul li {
+        margin: 15px 0;
+    }
+
+    .hero h1, .page-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p, .page-hero p {
+        font-size: 1rem;
+    }
+
+    .top-bar .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contact-info {
+        margin-bottom: 10px;
+    }
+
+    .profile-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .philosophy-content p {
+        font-size: 1.1rem;
+    }
+    
+    .tab-btn {
+        width: 100%;
+        text-align: left;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+    }
+    
+    .tab-btn.active {
+        border-left: 3px solid var(--primary);
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero, .page-hero {
+        padding: 80px 0;
+    }
+    
+    .hero h1, .page-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .achievements-grid, .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-options {
+        grid-template-columns: 1fr;
+    }
+
+    .option.featured {
+        transform: none;
+    }
+}

@@ -9,13 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> +91 98765 43210</span>
+                <span><i class="fas fa-envelope"></i> contact@lawfirm.com</span>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
     <header>
         <div class="container">
             <a href="index.html" class="logo">Law<span>Firm</span></a>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="contact.html" class="btn">Contact</a></li>
@@ -42,18 +58,36 @@
                 <!-- Main Articles -->
                 <div class="articles">
                     <article class="blog-post">
-                        <img src="images/blog1.jpg" alt="Blog Post">
+                        <img src="images/blog1.jpg" alt="New Changes in Corporate Tax Regulations">
                         <div class="post-meta">
                             <span class="category">Corporate Law</span>
                             <span class="date">June 15, 2023</span>
                         </div>
                         <h2><a href="single-post.html">New Changes in Corporate Tax Regulations</a></h2>
-                        <p>Analysis of the recent amendments to corporate tax laws and how they affect businesses of different sizes...</p>
+                        <p>Analysis of the recent amendments to corporate tax laws and how they affect businesses of different sizes. We break down the key changes and what they mean for your company's financial planning.</p>
                         <a href="single-post.html" class="read-more">Read More</a>
                     </article>
 
                     <article class="blog-post">
-                        <!-- Similar structure for other posts -->
+                        <img src="images/blog2.jpg" alt="Understanding the New Data Protection Bill">
+                        <div class="post-meta">
+                            <span class="category">Legal Updates</span>
+                            <span class="date">May 28, 2023</span>
+                        </div>
+                        <h2><a href="single-post.html">Understanding the New Data Protection Bill</a></h2>
+                        <p>A comprehensive guide to the upcoming data protection legislation and what businesses need to do to ensure compliance before it comes into effect next year.</p>
+                        <a href="single-post.html" class="read-more">Read More</a>
+                    </article>
+
+                    <article class="blog-post">
+                        <img src="images/blog3.jpg" alt="Divorce Mediation vs Litigation">
+                        <div class="post-meta">
+                            <span class="category">Family Law</span>
+                            <span class="date">May 10, 2023</span>
+                        </div>
+                        <h2><a href="single-post.html">Divorce Mediation vs Litigation: What's Right for You?</a></h2>
+                        <p>Exploring the pros and cons of different approaches to divorce proceedings, helping you make an informed decision about which path might work best for your situation.</p>
+                        <a href="single-post.html" class="read-more">Read More</a>
                     </article>
                 </div>
 
@@ -66,26 +100,40 @@
                             <li><a href="#">Criminal Law (8)</a></li>
                             <li><a href="#">Family Law (5)</a></li>
                             <li><a href="#">Legal Updates (15)</a></li>
+                            <li><a href="#">Real Estate (7)</a></li>
                         </ul>
                     </div>
 
                     <div class="sidebar-widget">
                         <h3>Popular Posts</h3>
                         <div class="popular-post">
-                            <img src="images/blog-thumb1.jpg" alt="Popular Post">
+                            <img src="images/blog-thumb1.jpg" alt="How to Protect Your Business from Legal Disputes">
                             <div class="post-content">
                                 <h4><a href="#">How to Protect Your Business from Legal Disputes</a></h4>
                                 <span class="date">May 10, 2023</span>
                             </div>
                         </div>
-                        <!-- More popular posts -->
+                        <div class="popular-post">
+                            <img src="images/blog-thumb2.jpg" alt="Understanding Your Rights During Police Interrogation">
+                            <div class="post-content">
+                                <h4><a href="#">Understanding Your Rights During Police Interrogation</a></h4>
+                                <span class="date">April 22, 2023</span>
+                            </div>
+                        </div>
+                        <div class="popular-post">
+                            <img src="images/blog-thumb3.jpg" alt="The Complete Guide to Property Inheritance Laws">
+                            <div class="post-content">
+                                <h4><a href="#">The Complete Guide to Property Inheritance Laws</a></h4>
+                                <span class="date">April 5, 2023</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="sidebar-widget">
                         <h3>Subscribe</h3>
                         <p>Get the latest legal updates delivered to your inbox</p>
                         <form class="subscribe-form">
-                            <input type="email" placeholder="Your Email">
+                            <input type="email" placeholder="Your Email" required>
                             <button type="submit" class="btn">Subscribe</button>
                         </form>
                     </div>
@@ -94,7 +142,7 @@
         </div>
     </section>
 
-     <!-- CTA Section -->
+    <!-- CTA Section -->
     <section class="cta">
         <div class="container">
             <h2>Ready to Discuss Your Case?</h2>
@@ -147,5 +195,14 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact">
+        <a href="https://wa.me/919876543210" class="whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
