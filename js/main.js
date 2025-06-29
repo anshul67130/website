@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     mobileMenuBtn.addEventListener('click', function() {
         nav.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
     });
     
     // Close menu when clicking on a link
@@ -12,33 +13,72 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             nav.classList.remove('active');
+            document.body.classList.remove('menu-open');
         });
     });
     
+    // Set active page in navigation
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navItems = document.querySelectorAll('nav ul li a');
+    
+    navItems.forEach(item => {
+        const itemHref = item.getAttribute('href');
+        if (itemHref === currentPage || 
+            (currentPage === '' && itemHref === 'index.html') ||
+            (currentPage.includes(itemHref.replace('.html', '')) && itemHref !== 'index.html')) {
+            item.classList.add('active');
+        }
+    });
+    
     // Testimonial Slider
-    let currentTestimonial = 0;
-    const testimonials = document.querySelectorAll('.testimonial');
-    
-    function showTestimonial(index) {
-        testimonials.forEach((testimonial, i) => {
-            testimonial.style.display = i === index ? 'block' : 'none';
+    const testimonialSlider = document.querySelector('.testimonial-slider');
+    if (testimonialSlider) {
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial');
+        
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.style.opacity = '0';
+                testimonial.style.display = 'none';
+            });
+            
+            testimonials[index].style.display = 'block';
+            setTimeout(() => {
+                testimonials[index].style.opacity = '1';
+            }, 50);
+        }
+        
+        // Auto-rotate testimonials every 5 seconds
+        let testimonialInterval = setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+        
+        // Pause on hover
+        testimonialSlider.addEventListener('mouseenter', () => {
+            clearInterval(testimonialInterval);
         });
+        
+        testimonialSlider.addEventListener('mouseleave', () => {
+            testimonialInterval = setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+        });
+        
+        // Initialize
+        showTestimonial(0);
     }
-    
-    // Auto-rotate testimonials every 5 seconds
-    setInterval(() => {
-        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-        showTestimonial(currentTestimonial);
-    }, 5000);
-    
-    // Initialize
-    showTestimonial(0);
     
     // Tab functionality for services page
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
     if (tabBtns.length > 0) {
+        // Show first tab by default
+        tabBtns[0].classList.add('active');
+        tabContents[0].classList.add('active');
+        
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 // Remove active class from all buttons and contents
@@ -49,6 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.classList.add('active');
                 const tabId = btn.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
+                
+                // Smooth scroll to top of tab content
+                document.getElementById(tabId).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             });
         });
     }
@@ -71,11 +117,36 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Here you would typically send the data to a server
-            console.log('Form submitted:', { name, email, message });
+            // For now, we'll just log it and show a success message
+            console.log('Form submitted:', { 
+                name: name,
+                email: email,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: message
+            });
             
             // Show success message
             alert('Thank you for your message! We will contact you soon.');
             contactForm.reset();
         });
     }
+    
+    // Add smooth scrolling to all links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 });
