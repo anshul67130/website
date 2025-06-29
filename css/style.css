@@ -18,17 +18,24 @@ body {
     font-family: 'Lato', sans-serif;
     color: var(--text);
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body.menu-open {
+    overflow: hidden;
 }
 
 h1, h2, h3, h4 {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
+    color: var(--text);
 }
 
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 15px;
 }
 
 .btn {
@@ -39,11 +46,17 @@ h1, h2, h3, h4 {
     border-radius: 5px;
     text-decoration: none;
     transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
 }
 
 .btn:hover {
     background: var(--secondary);
     color: var(--text);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .btn-large {
@@ -62,11 +75,27 @@ h1, h2, h3, h4 {
 .top-bar .container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contact-info span {
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.contact-info i, .social-icons a {
+    margin-right: 5px;
 }
 
 .social-icons a {
     color: white;
     margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--secondary);
 }
 
 header {
@@ -109,36 +138,53 @@ nav ul li a {
     color: var(--text);
     font-weight: 700;
     transition: color 0.3s ease;
+    position: relative;
 }
 
+nav ul li a.active,
 nav ul li a:hover {
     color: var(--primary);
+}
+
+nav ul li a.active:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
 }
 
 .mobile-menu {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
+    color: var(--primary);
 }
 
 /* Hero Section */
-.hero {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/hero-bg.jpg');
+.hero, .page-hero {
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
-    padding: 100px 0;
+    padding: 120px 0;
+    position: relative;
 }
 
-.hero h1 {
+.hero h1, .page-hero h1 {
     font-size: 3rem;
     margin-bottom: 20px;
+    line-height: 1.2;
 }
 
-.hero p {
+.hero p, .page-hero p {
     font-size: 1.2rem;
     margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Why Choose Us */
@@ -164,11 +210,12 @@ nav ul li a:hover {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature:hover {
     transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
 .feature i {
@@ -209,6 +256,7 @@ nav ul li a:hover {
 .area:hover {
     background: var(--primary);
     color: white;
+    transform: translateY(-10px);
 }
 
 .area:hover i, .area:hover a {
@@ -231,6 +279,11 @@ nav ul li a:hover {
     font-weight: 700;
     display: inline-block;
     margin-top: 15px;
+    transition: color 0.3s ease;
+}
+
+.area:hover a {
+    color: var(--secondary);
 }
 
 /* Testimonials */
@@ -248,6 +301,7 @@ nav ul li a:hover {
 .testimonial-slider {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
 }
 
 .testimonial {
@@ -256,11 +310,23 @@ nav ul li a:hover {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     margin-bottom: 30px;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.testimonial.active {
+    opacity: 1;
+    position: relative;
 }
 
 .testimonial p {
     font-style: italic;
     margin-bottom: 20px;
+    font-size: 1.1rem;
 }
 
 .client {
@@ -302,6 +368,9 @@ nav ul li a:hover {
 .cta p {
     margin-bottom: 30px;
     font-size: 1.1rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cta .btn {
@@ -311,6 +380,7 @@ nav ul li a:hover {
 
 .cta .btn:hover {
     background: white;
+    color: var(--text);
 }
 
 /* Footer */
@@ -330,10 +400,12 @@ footer {
 .footer-col h3 {
     margin-bottom: 20px;
     font-size: 1.3rem;
+    color: white;
 }
 
 .footer-col p {
     margin-bottom: 15px;
+    color: #ccc;
 }
 
 .footer-col ul {
@@ -404,49 +476,8 @@ footer {
 
 .whatsapp:hover {
     transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .mobile-menu {
-        display: block;
-    }
-    
-    nav {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        height: 100vh;
-        background: white;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-        z-index: 999;
-    }
-    
-    nav.active {
-        left: 0;
-    }
-    
-    nav ul {
-        flex-direction: column;
-        padding: 80px 30px;
-    }
-    
-    nav ul li {
-        margin: 15px 0;
-    }
-    
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-    
-    .hero p {
-        font-size: 1rem;
-    }
-}
-
-/* Add these new styles to your existing style.css */
 
 /* Page Hero Styles */
 .page-hero {
@@ -609,6 +640,11 @@ footer {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.member:hover {
+    transform: translateY(-10px);
 }
 
 .member img {
@@ -629,6 +665,7 @@ footer {
     justify-content: center;
     margin-bottom: 40px;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
 .tab-btn {
@@ -654,6 +691,12 @@ footer {
 
 .tab-content.active {
     display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .service-features {
@@ -661,6 +704,16 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     margin: 40px 0;
+}
+
+.service-features .feature {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.service-features .feature i {
+    font-size: 2rem;
+    margin-bottom: 15px;
 }
 
 .case-study {
@@ -727,6 +780,11 @@ footer {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     position: relative;
+    transition: transform 0.3s ease;
+}
+
+.option:hover {
+    transform: translateY(-10px);
 }
 
 .option.featured {
@@ -779,6 +837,11 @@ footer {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
 }
 
 .blog-post img {
@@ -797,6 +860,7 @@ footer {
 
 .blog-post h2 {
     padding: 0 20px 20px;
+    font-size: 1.5rem;
 }
 
 .blog-post h2 a {
@@ -819,6 +883,11 @@ footer {
     color: var(--primary);
     font-weight: bold;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: var(--secondary);
 }
 
 /* Sidebar */
@@ -856,6 +925,7 @@ footer {
 .popular-post {
     display: flex;
     margin-bottom: 20px;
+    align-items: center;
 }
 
 .popular-post img {
@@ -874,6 +944,11 @@ footer {
 .popular-post h4 a {
     color: var(--text);
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.popular-post h4 a:hover {
+    color: var(--primary);
 }
 
 .popular-post .date {
@@ -887,6 +962,7 @@ footer {
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    font-family: 'Lato', sans-serif;
 }
 
 /* Contact Page */
@@ -923,6 +999,14 @@ footer {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-family: 'Lato', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    border-color: var(--primary);
+    outline: none;
 }
 
 .form-group textarea {
@@ -955,6 +1039,12 @@ footer {
 }
 
 /* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .hero h1, .page-hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
 @media (max-width: 992px) {
     .profile-grid {
         grid-template-columns: 1fr;
@@ -967,27 +1057,66 @@ footer {
     .contact-grid {
         grid-template-columns: 1fr;
     }
+
+    .service-tabs {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 768px) {
+    .mobile-menu {
+        display: block;
+    }
+    
+    nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        z-index: 999;
+        padding-top: 80px;
+    }
+    
+    nav.active {
+        left: 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        padding: 0 30px;
+    }
+    
+    nav ul li {
+        margin: 15px 0;
+    }
+
     .hero h1, .page-hero h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
     
     .hero p, .page-hero p {
         font-size: 1rem;
     }
-    
+
+    .top-bar .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contact-info {
+        margin-bottom: 10px;
+    }
+
     .profile-content h2 {
         font-size: 1.8rem;
     }
     
     .philosophy-content p {
         font-size: 1.1rem;
-    }
-    
-    .service-tabs {
-        flex-direction: column;
     }
     
     .tab-btn {
@@ -1014,5 +1143,13 @@ footer {
     
     .achievements-grid, .process-steps {
         grid-template-columns: 1fr;
+    }
+
+    .pricing-options {
+        grid-template-columns: 1fr;
+    }
+
+    .option.featured {
+        transform: none;
     }
 }
