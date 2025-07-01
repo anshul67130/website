@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-    --primary: #000080;
+    --primary: #a92210;
     --secondary: #FFD700;
     --accent: #FFFFFF;
     --text: #333333;
@@ -140,7 +140,14 @@ nav ul li a {
     transition: color 0.3s ease;
     position: relative;
 }
+nav ul li a.btn.active {
+    background: var(--primary);
+    color: white;
+}
 
+nav ul li a.btn.active:after {
+    display: none; /* Remove the underline for button-style links */
+}
 nav ul li a.active,
 nav ul li a:hover {
     color: var(--primary);
@@ -451,7 +458,15 @@ footer {
     font-size: 0.9rem;
     color: #aaa;
 }
+.copyright p {
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
 
+.copyright p:first-child {
+    font-size: 0.9rem;
+}
 /* Floating Contact */
 .floating-contact {
     position: fixed;

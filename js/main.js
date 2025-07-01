@@ -17,18 +17,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Set active page in navigation
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navItems = document.querySelectorAll('nav ul li a');
-    
-    navItems.forEach(item => {
-        const itemHref = item.getAttribute('href');
-        if (itemHref === currentPage || 
-            (currentPage === '' && itemHref === 'index.html') ||
-            (currentPage.includes(itemHref.replace('.html', '')) && itemHref !== 'index.html')) {
-            item.classList.add('active');
-        }
-    });
+// Set active page in navigation
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const navItems = document.querySelectorAll('nav ul li a');
+
+navItems.forEach(item => {
+    const itemHref = item.getAttribute('href');
+    if (itemHref === currentPage || 
+        (currentPage === '' && itemHref === 'index.html') ||
+        (currentPage.includes(itemHref.replace('.html', '')) && itemHref !== 'index.html')) {
+        item.classList.add('active');
+    }
+});
     
     // Testimonial Slider
     const testimonialSlider = document.querySelector('.testimonial-slider');
