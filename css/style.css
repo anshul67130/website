@@ -1201,3 +1201,7 @@ footer {
     line-height: 1.6;
 }
 }
+
+.hidden {
+    display: none;
+}
