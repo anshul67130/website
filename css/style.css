@@ -1084,7 +1084,72 @@ footer {
         flex-direction: column;
     }
 }
+/* Service Tabs Responsive Adjustments */
+.service-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
 
+.tab-btn {
+    padding: 12px 25px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    border-bottom: 3px solid var(--primary);
+    color: var(--primary);
+}
+
+@media (max-width: 992px) {
+    .service-tabs {
+        gap: 8px;
+    }
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .tab-btn {
+        flex: 1 0 calc(50% - 10px);
+        text-align: center;
+        white-space: normal;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-btn {
+        flex: 1 0 100%;
+    }
+}
+
+/* New Icons for Additional Services */
+.fa-shield-alt, 
+.fa-lock, 
+.fa-network-wired,
+.fa-cannabis,
+.fa-car-crash,
+.fa-file-invoice-dollar,
+.fa-traffic-light,
+.fa-hand-holding-usd,
+.fa-home-heart {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
 @media (max-width: 768px) {
     .mobile-menu {
         display: block;
