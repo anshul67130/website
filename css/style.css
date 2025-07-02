@@ -180,7 +180,9 @@ nav ul li a.active:after {
     position: relative;
 }
 
+/* Around line ~200 in your CSS (hero section) */
 .hero h1, .page-hero h1 {
+    color: white;
     font-size: 3rem;
     margin-bottom: 20px;
     line-height: 1.2;
@@ -193,7 +195,6 @@ nav ul li a.active:after {
     margin-left: auto;
     margin-right: auto;
 }
-
 /* Why Choose Us */
 .why-us {
     padding: 80px 0;
