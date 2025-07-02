@@ -320,10 +320,10 @@ nav ul li a.active:after {
 
 .testimonial {
     background: white;
-    padding: 30px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
+    margin: 0 auto;
     transition: opacity 0.5s ease;
     opacity: 0;
     position: absolute;
@@ -337,33 +337,59 @@ nav ul li a.active:after {
     position: relative;
 }
 
+.testimonial-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
 .testimonial p {
     font-style: italic;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 1.1rem;
+    line-height: 1.8;
 }
 
 .client {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 20px;
 }
 
 .client img {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 15px;
+}
+
+.client-info {
+    text-align: left;
 }
 
 .client h4 {
     margin-bottom: 5px;
+    font-size: 1.1rem;
 }
 
 .client span {
     color: var(--dark-gray);
     font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .testimonial {
+        padding: 30px 20px;
+    }
+    
+    .client {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .client-info {
+        text-align: center;
+    }
 }
 
 /* CTA Section */
