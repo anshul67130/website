@@ -2,10 +2,28 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu');
     const nav = document.querySelector('nav');
+    const body = document.body;
     
-    mobileMenuBtn.addEventListener('click', function() {
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
         nav.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+        body.classList.toggle('menu-open');
+        
+        // Toggle icon between bars and times
+        if (nav.classList.contains('active')) {
+            mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && e.target !== mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
+            nav.classList.remove('active');
+            body.classList.remove('menu-open');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
     });
     
     // Close menu when clicking on a link
@@ -13,22 +31,23 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             nav.classList.remove('active');
-            document.body.classList.remove('menu-open');
+            body.classList.remove('menu-open');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         });
     });
     
-// Set active page in navigation
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-const navItems = document.querySelectorAll('nav ul li a');
+    // Set active page in navigation
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navItems = document.querySelectorAll('nav ul li a');
 
-navItems.forEach(item => {
-    const itemHref = item.getAttribute('href');
-    if (itemHref === currentPage || 
-        (currentPage === '' && itemHref === 'index.html') ||
-        (currentPage.includes(itemHref.replace('.html', '')) && itemHref !== 'index.html')) {
-        item.classList.add('active');
-    }
-});
+    navItems.forEach(item => {
+        const itemHref = item.getAttribute('href');
+        if (itemHref === currentPage || 
+            (currentPage === '' && itemHref === 'index.html') ||
+            (currentPage.includes(itemHref.replace('.html', '')) && itemHref !== 'index.html')) {
+            item.classList.add('active');
+        }
+    });
     
     // Testimonial Slider
     const testimonialSlider = document.querySelector('.testimonial-slider');
@@ -99,52 +118,52 @@ navItems.forEach(item => {
         });
     }
 
-// Contact form submission
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-        
-        // Simple validation
-        if (!name || !email || !message) {
-            alert('Please fill in all required fields');
-            return;
-        }
-        
-        // Show loading state
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        
-        // Use Netlify's form handling
-        const formData = new FormData(contactForm);
-        
-        fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData).toString()
-        })
-        .then(() => {
-            // Show success message
-            alert('Thank you for your message! We will contact you soon.');
-            contactForm.reset();
-        })
-        .catch(error => {
-            alert('There was an error sending your message. Please try again later.');
-            console.error('Form submission error:', error);
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalBtnText;
+    // Contact form submission
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Simple validation
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Use Netlify's form handling
+            const formData = new FormData(contactForm);
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                // Show success message
+                alert('Thank you for your message! We will contact you soon.');
+                contactForm.reset();
+            })
+            .catch(error => {
+                alert('There was an error sending your message. Please try again later.');
+                console.error('Form submission error:', error);
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            });
         });
-    });
-}
+    }
     
     // Add smooth scrolling to all links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
