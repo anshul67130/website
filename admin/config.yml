@@ -1,0 +1,25 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: editorial_workflow
+media_folder: "images/blog"
+public_folder: "/images/blog"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "_posts/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Category", name: "category", widget: "select", options: ["Corporate Law", "Criminal Law", "Family Law", "Legal Updates", "Real Estate"]}
+      - {label: "Featured Image", name: "image", widget: "image", media_library: {config: {multiple: false}}}
+      - {label: "Excerpt", name: "excerpt", widget: "text", hint: "Short preview text for blog listing"}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "SEO Title", name: "seo_title", widget: "string", required: false}
+      - {label: "Meta Description", name: "meta_description", widget: "text", required: false}

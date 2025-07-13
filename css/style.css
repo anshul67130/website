@@ -1334,4 +1334,54 @@ img {
 
 .hidden {
     display: none;
+
+}
+/* Netlify CMS Styles */
+.nc-root {
+  --primary: #a92210;
+  --primary-text: #fff;
+}
+
+.nc-github-button {
+  background-color: #a92210;
+  border-color: #a92210;
+}
+
+.nc-github-button:hover {
+  background-color: #8a1c0d;
+}
+
+/* Blog Post Styles */
+.blog-post-full {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.blog-post-full .post-content {
+  margin-top: 2rem;
+  line-height: 1.6;
+}
+
+.blog-post-full .post-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.blog-post-full .post-content h2,
+.blog-post-full .post-content h3,
+.blog-post-full .post-content h4 {
+  margin-top: 1.5rem;
+  color: #333;
+}
+
+.blog-post-full .post-content p {
+  margin-bottom: 1rem;
+}
+
+.blog-post-full .post-content ul,
+.blog-post-full .post-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
 }

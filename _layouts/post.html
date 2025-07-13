@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<section class="page-hero" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/blog-bg.webp');">
+    <div class="container">
+        <h1>{{ page.title }}</h1>
+        <p>Legal Insights & Updates</p>
+    </div>
+</section>
+
+<section class="single-post">
+    <div class="container">
+        <article class="blog-post-full">
+            <div class="post-meta">
+                <span class="category">{{ page.category }}</span>
+                <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
+            </div>
+            <img src="{{ page.image }}" alt="{{ page.title }}" class="responsive-img">
+            <div class="post-content">
+                {{ content }}
+            </div>
+        </article>
+    </div>
+</section>
