@@ -7,13 +7,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Legal Blog | Advocate Chandrashekhar Dixit</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Blog Page Styles */
         .blog-hero {
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/blog-bg.webp');
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/blog-bg.webp');
             background-size: cover;
             background-position: center;
             padding: 100px 0;
@@ -200,14 +200,14 @@
     <!-- Navigation -->
     <header>
         <div class="container">
-            <a href="index.html" class="logo">Advocate <span>Chandrashekhar Dixit</span></a>
+            <a href="/" class="logo">Advocate <span>Chandrashekhar Dixit</span></a>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html" class="btn">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/services.html">Services</a></li>
+                    <li><a href="/blog.html">Blog</a></li>
+                    <li><a href="/contact.html" class="btn">Contact</a></li>
                 </ul>
             </nav>
             <div class="mobile-menu">
@@ -229,45 +229,9 @@
         <div class="container">
             <div class="blog-grid">
                 <!-- Main Articles -->
-                <div class="articles">
-                    <article class="blog-post">
-                        <img src="images/blog1.webp" alt="New Changes in Corporate Tax Regulations" class="post-image">
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span class="post-category">Corporate Law</span>
-                                <span class="post-date">June 15, 2023</span>
-                            </div>
-                            <h2 class="post-title">New Changes in Corporate Tax Regulations</h2>
-                            <p class="post-excerpt">Analysis of the recent amendments to corporate tax laws and how they affect businesses of different sizes. We break down the key changes and what they mean for your company's financial planning.</p>
-                            <a href="blog/corporate-tax-changes.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-
-                    <article class="blog-post">
-                        <img src="images/blog2.webp" alt="Understanding the New Data Protection Bill" class="post-image">
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span class="post-category">Legal Updates</span>
-                                <span class="post-date">May 28, 2023</span>
-                            </div>
-                            <h2 class="post-title">Understanding the New Data Protection Bill</h2>
-                            <p class="post-excerpt">A comprehensive guide to the upcoming data protection legislation and what businesses need to do to ensure compliance before it comes into effect next year.</p>
-                            <a href="blog/data-protection-bill.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-
-                    <article class="blog-post">
-                        <img src="images/blog3.webp" alt="Divorce Mediation vs Litigation" class="post-image">
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span class="post-category">Family Law</span>
-                                <span class="post-date">May 10, 2023</span>
-                            </div>
-                            <h2 class="post-title">Divorce Mediation vs Litigation: What's Right for You?</h2>
-                            <p class="post-excerpt">Exploring the pros and cons of different approaches to divorce proceedings, helping you make an informed decision about which path might work best for your situation.</p>
-                            <a href="blog/divorce-mediation.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
+                <div class="articles" id="blog-posts">
+                    <!-- Blog posts will be loaded here by JavaScript -->
+                    <div class="loading">Loading blog posts...</div>
                 </div>
 
                 <!-- Sidebar -->
@@ -286,21 +250,21 @@
                     <div class="sidebar-widget">
                         <h3>Popular Posts</h3>
                         <div class="popular-post">
-                            <img src="images/blog-thumb1.webp" alt="How to Protect Your Business from Legal Disputes">
+                            <img src="/images/blog-thumb1.webp" alt="How to Protect Your Business from Legal Disputes">
                             <div class="post-content">
                                 <h4><a href="#">How to Protect Your Business from Legal Disputes</a></h4>
                                 <span class="post-date">May 10, 2023</span>
                             </div>
                         </div>
                         <div class="popular-post">
-                            <img src="images/blog-thumb2.webp" alt="Understanding Your Rights During Police Interrogation">
+                            <img src="/images/blog-thumb2.webp" alt="Understanding Your Rights During Police Interrogation">
                             <div class="post-content">
                                 <h4><a href="#">Understanding Your Rights During Police Interrogation</a></h4>
                                 <span class="post-date">April 22, 2023</span>
                             </div>
                         </div>
                         <div class="popular-post">
-                            <img src="images/blog-thumb3.webp" alt="The Complete Guide to Property Inheritance Laws">
+                            <img src="/images/blog-thumb3.webp" alt="The Complete Guide to Property Inheritance Laws">
                             <div class="post-content">
                                 <h4><a href="#">The Complete Guide to Property Inheritance Laws</a></h4>
                                 <span class="post-date">April 5, 2023</span>
@@ -311,8 +275,8 @@
                     <div class="sidebar-widget">
                         <h3>Subscribe</h3>
                         <p>Get the latest legal updates delivered to your inbox</p>
-                        <form class="subscribe-form">
-                            <input type="email" placeholder="Your Email" required>
+                        <form class="subscribe-form" name="subscribe" netlify>
+                            <input type="email" name="email" placeholder="Your Email" required>
                             <button type="submit" class="btn">Subscribe</button>
                         </form>
                         <div class="admin-link">
@@ -331,7 +295,7 @@
         <div class="container">
             <h2>Need Legal Assistance?</h2>
             <p>Contact us today for a confidential consultation</p>
-            <a href="contact.html" class="btn btn-large">Get in Touch</a>
+            <a href="/contact.html" class="btn btn-large">Get in Touch</a>
         </div>
     </section>
 
@@ -350,20 +314,20 @@
                 <div class="footer-col">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/services.html">Services</a></li>
+                        <li><a href="/blog.html">Blog</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h3>Practice Areas</h3>
                     <ul>
-                        <li><a href="services.html#corporate">Corporate Law</a></li>
-                        <li><a href="services.html#criminal">Criminal Defense</a></li>
-                        <li><a href="services.html#family">Family Law</a></li>
-                        <li><a href="services.html#realestate">Real Estate</a></li>
+                        <li><a href="/services.html#corporate">Corporate Law</a></li>
+                        <li><a href="/services.html#criminal">Criminal Defense</a></li>
+                        <li><a href="/services.html#family">Family Law</a></li>
+                        <li><a href="/services.html#realestate">Real Estate</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -387,6 +351,57 @@
         </a>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        // Function to load blog posts
+        async function loadBlogPosts() {
+            try {
+                const response = await fetch('/blog-index.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load blog posts');
+                }
+                const posts = await response.json();
+                const container = document.getElementById('blog-posts');
+                let html = '';
+                
+                posts.forEach(post => {
+                    const postDate = new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    
+                    html += `
+                        <article class="blog-post">
+                            <img src="${post.image}" alt="${post.title}" class="post-image">
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span class="post-category">${post.category}</span>
+                                    <span class="post-date">${postDate}</span>
+                                </div>
+                                <h2 class="post-title"><a href="/blog/${post.slug}/">${post.title}</a></h2>
+                                <p class="post-excerpt">${post.excerpt}</p>
+                                <a href="/blog/${post.slug}/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    `;
+                });
+                
+                container.innerHTML = html;
+                
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                document.getElementById('blog-posts').innerHTML = `
+                    <div class="error">
+                        <p>Could not load blog posts. Please try again later.</p>
+                        <a href="/admin/#/collections/blog" class="btn">Add New Post</a>
+                    </div>
+                `;
+            }
+        }
+        
+        // Load posts when page is ready
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
 </body>
 </html>

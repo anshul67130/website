@@ -10,10 +10,9 @@ collections:
     label: "Blog Posts"
     folder: "blog"
     create: true
-    identifier_field: slug
     slug: "{{slug}}"
+    identifier_field: slug
     fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "blog-post"}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
       - {label: "Category", name: "category", widget: "select", options: ["Corporate Law", "Criminal Law", "Family Law", "Legal Updates", "Real Estate"]}

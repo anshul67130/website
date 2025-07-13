@@ -1,43 +1,41 @@
-// build.js
 const fs = require('fs');
 const path = require('path');
-const matter = require('gray-matter'); // For parsing front matter
+const matter = require('gray-matter');
 
-// 1. Configure paths
+// Paths
 const BLOG_DIR = path.join(__dirname, 'blog');
 const OUTPUT_FILE = path.join(__dirname, 'blog-index.json');
 
-// 2. Get all blog post folders
-const getPosts = () => {
-  return fs.readdirSync(BLOG_DIR)
-    .filter(folder => 
-      folder !== 'index.html' && 
-      fs.statSync(path.join(BLOG_DIR, folder)).isDirectory()
-    )
-    .map(folder => {
-      const postPath = path.join(BLOG_DIR, folder, 'index.html');
-      const content = fs.readFileSync(postPath, 'utf8');
-      
-      // Extract metadata from HTML comments or front matter
-      const metaMatch = content.match(/<!-- META:({.*?})-->/s);
-      const meta = metaMatch ? JSON.parse(metaMatch[1]) : {};
-      
-      return {
-        title: meta.title || folder.replace(/-/g, ' '),
-        date: meta.date || new Date().toISOString(),
-        category: meta.category || 'Uncategorized',
-        image: meta.image || '/images/blog-default.webp',
-        url: `/blog/${folder}`,
-        excerpt: meta.excerpt || ''
-      };
-    })
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest first
-};
+// Get all blog posts
+function getBlogPosts() {
+    const posts = [];
+    const folders = fs.readdirSync(BLOG_DIR);
+    
+    folders.forEach(folder => {
+        const folderPath = path.join(BLOG_DIR, folder);
+        const indexPath = path.join(folderPath, 'index.html');
+        
+        if (fs.existsSync(indexPath)) {
+            const fileContent = fs.readFileSync(indexPath, 'utf8');
+            const { data: frontmatter } = matter(fileContent);
+            
+            posts.push({
+                title: frontmatter.title || 'Untitled',
+                date: frontmatter.date || new Date().toISOString(),
+                category: frontmatter.category || 'Uncategorized',
+                excerpt: frontmatter.excerpt || '',
+                image: frontmatter.image || '/images/blog-default.jpg',
+                slug: folder
+            });
+        }
+    });
+    
+    // Sort by date (newest first)
+    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return posts;
+}
 
-// 3. Generate the index
-fs.writeFileSync(
-  OUTPUT_FILE,
-  JSON.stringify(getPosts(), null, 2)
-);
-
-console.log('✅ Generated blog-index.json');
+// Generate the index
+const blogPosts = getBlogPosts();
+fs.writeFileSync(OUTPUT_FILE, JSON.stringify(blogPosts, null, 2));
+console.log(`Generated ${blogPosts.length} blog posts in ${OUTPUT_FILE}`);
