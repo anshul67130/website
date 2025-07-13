@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Your existing head content -->
+  <title>Blog | Advocate Chandrashekhar Dixit</title>
+</head>
+<body>
+  <!-- Your existing header/nav -->
+
+  <section class="blog-listing">
+    <div class="container">
+      <h1>Legal Insights</h1>
+      <div id="blog-posts">
+        <!-- Posts will be loaded here by JavaScript -->
+        Loading articles...
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Fetch and display blog posts
+    fetch('/blog-index.json')
+      .then(res => res.json())
+      .then(posts => {
+        let html = '';
+        posts.forEach(post => {
+          html += `
+            <article class="blog-post">
+              <img src="${post.image}" alt="${post.title}">
+              <div class="post-meta">
+                <span class="category">${post.category}</span>
+                <span class="date">${new Date(post.date).toLocaleDateString()}</span>
+              </div>
+              <h2><a href="${post.url}">${post.title}</a></h2>
+              <p>${post.excerpt || 'Read more...'}</p>
+              <a href="${post.url}" class="read-more">Read More</a>
+            </article>
+          `;
+        });
+        document.getElementById('blog-posts').innerHTML = html;
+      });
+  </script>
+</body>
+</html>
