@@ -352,56 +352,73 @@
     </div>
 
     <script src="/js/main.js"></script>
-    <script>
-        // Function to load blog posts
-        async function loadBlogPosts() {
-            try {
-                const response = await fetch('/blog-index.json');
-                if (!response.ok) {
-                    throw new Error('Failed to load blog posts');
-                }
-                const posts = await response.json();
-                const container = document.getElementById('blog-posts');
-                let html = '';
-                
-                posts.forEach(post => {
-                    const postDate = new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-                    
-                    html += `
-                        <article class="blog-post">
-                            <img src="${post.image}" alt="${post.title}" class="post-image">
-                            <div class="post-content">
-                                <div class="post-meta">
-                                    <span class="post-category">${post.category}</span>
-                                    <span class="post-date">${postDate}</span>
-                                </div>
-                                <h2 class="post-title"><a href="/blog/${post.slug}/">${post.title}</a></h2>
-                                <p class="post-excerpt">${post.excerpt}</p>
-                                <a href="/blog/${post.slug}/" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </article>
-                    `;
-                });
-                
-                container.innerHTML = html;
-                
-            } catch (error) {
-                console.error('Error loading blog posts:', error);
-                document.getElementById('blog-posts').innerHTML = `
-                    <div class="error">
-                        <p>Could not load blog posts. Please try again later.</p>
-                        <a href="/admin/#/collections/blog" class="btn">Add New Post</a>
+<script>
+    // Function to load blog posts
+    async function loadBlogPosts() {
+        try {
+            const response = await fetch('/blog-index.json');
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            const posts = await response.json();
+            const container = document.getElementById('blog-posts');
+            
+            if (!posts || posts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-newspaper"></i>
+                        <h3>No Blog Posts Yet</h3>
+                        <p>Check back soon for our latest legal insights.</p>
+                        <a href="/admin/#/collections/blog/new" class="btn">Create First Post</a>
                     </div>
                 `;
+                return;
             }
+            
+            let html = '';
+            posts.forEach(post => {
+                const postDate = new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                html += `
+                    <article class="blog-post">
+                        <img src="${post.image || '/images/blog-default.jpg'}" 
+                             alt="${post.title}" 
+                             class="post-image">
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="post-category">${post.category || 'Uncategorized'}</span>
+                                <span class="post-date">${postDate}</span>
+                            </div>
+                            <h2 class="post-title">
+                                <a href="/blog/${post.slug}/">${post.title}</a>
+                            </h2>
+                            <p class="post-excerpt">${post.excerpt || 'Read more...'}</p>
+                            <a href="/blog/${post.slug}/" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+        } catch (error) {
+            console.error('Error loading blog posts:', error);
+            document.getElementById('blog-posts').innerHTML = `
+                <div class="error">
+                    <p>Could not load blog posts. Please try again later.</p>
+                    <a href="/admin/#/collections/blog" class="btn">Manage Posts</a>
+                </div>
+            `;
         }
-        
-        // Load posts when page is ready
-        document.addEventListener('DOMContentLoaded', loadBlogPosts);
-    </script>
+    }
+    
+    // Load posts when page is ready
+    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+</script>
 </body>
 </html>

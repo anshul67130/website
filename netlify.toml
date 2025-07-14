@@ -1,9 +1,6 @@
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "."
 
 [build.environment]
-  NODE_VERSION = "18"
-
-[context.production.environment]
-  NODE_ENV = "production"
+  NODE_VERSION = "16"

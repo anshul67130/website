@@ -4,38 +4,49 @@ const matter = require('gray-matter');
 
 // Paths
 const BLOG_DIR = path.join(__dirname, 'blog');
+const TEMPLATE_FILE = path.join(__dirname, 'blog-template.html');
 const OUTPUT_FILE = path.join(__dirname, 'blog-index.json');
 
-// Get all blog posts
-function getBlogPosts() {
+// Process all blog posts
+function processBlogPosts() {
     const posts = [];
-    const folders = fs.readdirSync(BLOG_DIR);
-    
-    folders.forEach(folder => {
-        const folderPath = path.join(BLOG_DIR, folder);
-        const indexPath = path.join(folderPath, 'index.html');
-        
-        if (fs.existsSync(indexPath)) {
-            const fileContent = fs.readFileSync(indexPath, 'utf8');
-            const { data: frontmatter } = matter(fileContent);
+    const blogFolders = fs.readdirSync(BLOG_DIR).filter(f => 
+        fs.statSync(path.join(BLOG_DIR, f)).isDirectory()
+    );
+
+    blogFolders.forEach(folder => {
+        const postPath = path.join(BLOG_DIR, folder, 'index.html');
+        if (fs.existsSync(postPath)) {
+            const fileContent = fs.readFileSync(postPath, 'utf8');
+            const { data: frontmatter, content } = matter(fileContent);
             
+            // Create complete HTML file using your template
+            const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
+            const htmlContent = template
+                .replace(/{{title}}/g, frontmatter.title || 'Untitled')
+                .replace(/{{category}}/g, frontmatter.category || 'Uncategorized')
+                .replace(/{{date}}/g, frontmatter.date || new Date().toISOString())
+                .replace(/{{image}}/g, frontmatter.image || '/images/blog-default.jpg')
+                .replace(/{{body}}/g, content);
+
+            fs.writeFileSync(postPath, htmlContent);
+
+            // Add to index
             posts.push({
-                title: frontmatter.title || 'Untitled',
-                date: frontmatter.date || new Date().toISOString(),
-                category: frontmatter.category || 'Uncategorized',
-                excerpt: frontmatter.excerpt || '',
-                image: frontmatter.image || '/images/blog-default.jpg',
+                title: frontmatter.title,
+                date: frontmatter.date,
+                category: frontmatter.category,
+                excerpt: frontmatter.excerpt,
+                image: frontmatter.image,
                 slug: folder
             });
         }
     });
-    
+
     // Sort by date (newest first)
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-    return posts;
+    fs.writeFileSync(OUTPUT_FILE, JSON.stringify(posts, null, 2));
+    console.log(`Processed ${posts.length} blog posts`);
 }
 
-// Generate the index
-const blogPosts = getBlogPosts();
-fs.writeFileSync(OUTPUT_FILE, JSON.stringify(blogPosts, null, 2));
-console.log(`Generated ${blogPosts.length} blog posts in ${OUTPUT_FILE}`);
+processBlogPosts();
