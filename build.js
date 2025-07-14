@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 
-const marked = require('marked'); // you might need to install this
 
+const { marked } = require('marked');
 const blogDir = path.join(__dirname, 'blog');
 const templatePath = path.join(__dirname, 'templates', 'blog-post.html');
 const outputDir = path.join(__dirname, 'blog');
