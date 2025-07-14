@@ -1,25 +1,21 @@
 backend:
   name: git-gateway
   branch: main
-publish_mode: editorial_workflow
-media_folder: "images/blog"
-public_folder: "/images/blog"
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "blog"
-    label: "Blog Posts"
-    folder: "blog"  # This will create /blog/[slug]/index.html
+    label: "Blog"
+    folder: "blog"
     create: true
     slug: "{{slug}}"
-    extension: "html"  # Force HTML files instead of Markdown
-    format: "frontmatter"  # Use YAML frontmatter with HTML content
-    identifier_field: slug
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
-      - {label: "Category", name: "category", widget: "select", options: ["Corporate Law", "Criminal Law", "Family Law", "Legal Updates", "Real Estate"]}
-      - {label: "Featured Image", name: "image", widget: "image", media_library: {config: {multiple: false}}}
-      - {label: "Excerpt", name: "excerpt", widget: "text"}
-      - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "SEO Title", name: "seo_title", widget: "string", required: false}
-      - {label: "Meta Description", name: "meta_description", widget: "text", required: false}
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Excerpt", name: "excerpt", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }

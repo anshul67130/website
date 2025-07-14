@@ -2,51 +2,58 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 
-// Paths
-const BLOG_DIR = path.join(__dirname, 'blog');
-const TEMPLATE_FILE = path.join(__dirname, 'blog-template.html');
-const OUTPUT_FILE = path.join(__dirname, 'blog-index.json');
+const marked = require('marked'); // you might need to install this
 
-// Process all blog posts
-function processBlogPosts() {
-    const posts = [];
-    const blogFolders = fs.readdirSync(BLOG_DIR).filter(f => 
-        fs.statSync(path.join(BLOG_DIR, f)).isDirectory()
-    );
+const blogDir = path.join(__dirname, 'blog');
+const templatePath = path.join(__dirname, 'templates', 'blog-post.html');
+const outputDir = path.join(__dirname, 'blog');
+const indexPath = path.join(__dirname, 'blog-index.json');
 
-    blogFolders.forEach(folder => {
-        const postPath = path.join(BLOG_DIR, folder, 'index.html');
-        if (fs.existsSync(postPath)) {
-            const fileContent = fs.readFileSync(postPath, 'utf8');
-            const { data: frontmatter, content } = matter(fileContent);
-            
-            // Create complete HTML file using your template
-            const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
-            const htmlContent = template
-                .replace(/{{title}}/g, frontmatter.title || 'Untitled')
-                .replace(/{{category}}/g, frontmatter.category || 'Uncategorized')
-                .replace(/{{date}}/g, frontmatter.date || new Date().toISOString())
-                .replace(/{{image}}/g, frontmatter.image || '/images/blog-default.jpg')
-                .replace(/{{body}}/g, content);
+const template = fs.readFileSync(templatePath, 'utf-8');
 
-            fs.writeFileSync(postPath, htmlContent);
-
-            // Add to index
-            posts.push({
-                title: frontmatter.title,
-                date: frontmatter.date,
-                category: frontmatter.category,
-                excerpt: frontmatter.excerpt,
-                image: frontmatter.image,
-                slug: folder
-            });
-        }
-    });
-
-    // Sort by date (newest first)
-    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-    fs.writeFileSync(OUTPUT_FILE, JSON.stringify(posts, null, 2));
-    console.log(`Processed ${posts.length} blog posts`);
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 }
 
-processBlogPosts();
+const posts = [];
+
+fs.readdirSync(blogDir).forEach(file => {
+  if (file.endsWith('.md')) {
+    const filePath = path.join(blogDir, file);
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    const { data, content } = matter(raw);
+
+    const html = marked(content);
+    const slug = data.slug || file.replace(/\.md$/, '');
+    const outPath = path.join(outputDir, slug, 'index.html');
+
+    fs.mkdirSync(path.dirname(outPath), { recursive: true });
+
+    const finalHtml = template
+      .replace('{{ title }}', data.title)
+      .replace('{{ category }}', data.category)
+      .replace('{{ date | formatDate }}', formatDate(data.date))
+      .replace('{{ image }}', data.image)
+      .replace('{{ body | markdown }}', html);
+
+    fs.writeFileSync(outPath, finalHtml, 'utf-8');
+
+    posts.push({
+      title: data.title,
+      slug: slug,
+      date: data.date,
+      image: data.image,
+      category: data.category,
+      excerpt: data.excerpt,
+    });
+  }
+});
+
+fs.writeFileSync(indexPath, JSON.stringify(posts, null, 2), 'utf-8');
+
+console.log('✅ Blog posts built successfully');
